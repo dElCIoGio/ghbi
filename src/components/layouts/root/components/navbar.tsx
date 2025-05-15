@@ -15,13 +15,17 @@ const navlinks: {
         href: '/'
     },
     {
+        name: "Shop",
+        href: '/shop'
+    },
+    {
         name: 'About',
         href: '/about-us'
     },
     {
         name: 'Contact',
         href: '/contact'
-    },
+    }
 ]
 
 function Navbar() {
@@ -81,10 +85,10 @@ function Navbar() {
                 </div>
 
 
-                <div className="space-x-2 flex items-center">
+                <div className="space-x-0.5 flex items-center">
                     <Button asChild size="icon" variant="ghost"
                             className="text-zinc-500 hover:text-black transition-all ease-in-out duration-200">
-                        <Link to="/account">
+                        <Link to="/auth/login">
                             <UserCircle className="w-6 h-6"/>
                         </Link>
 
@@ -109,7 +113,7 @@ function RegionDropdown() {
     const [region, setRegion] = useState<string>("uk")
 
     return (
-        <div>
+        <div className="hidden">
             <Select value={region} onValueChange={setRegion}>
                 <SelectTrigger className="border-none shadow-none">
                     <SelectValue placeholder={region}/>

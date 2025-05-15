@@ -5,6 +5,11 @@ import AboutUs from "@/pages/about-us.tsx";
 import Listing from "@/pages/shop/listing.tsx";
 import ProductPage from "@/pages/shop/item.tsx";
 import CartPage from "@/pages/cart.tsx";
+import ForgotPasswordPage from "@/pages/auth/forgot-password.tsx";
+import LoginPage from "@/pages/auth/login.tsx";
+import ResetPasswordPage from "@/pages/auth/reset-password.tsx";
+import SignUpPage from "@/pages/auth/sign-up.tsx";
+import VerifyPage from "@/pages/auth/verify.tsx";
 
 function App() {
     return (
@@ -20,6 +25,15 @@ function App() {
                         <Route path=":productId" element={<ProductPage/>}/>
                     </Route>
                     <Route path="cart" element={<CartPage/>}/>
+
+                    <Route path="auth">
+                        <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
+                        <Route path="login" element={<LoginPage/>}/>
+                        <Route path="sign-up" element={<SignUpPage/>}/>
+                        <Route path="reset-password" element={<ResetPasswordPage/>}/>
+                        <Route path="verify-email" element={<VerifyPage/>}/>
+
+                    </Route>
 
                 </Route>
 
