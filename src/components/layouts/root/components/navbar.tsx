@@ -33,7 +33,7 @@ function Navbar() {
     const isMobile = useIsMobile();
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white/30 backdrop-blur-md">
+        <nav className="sticky top-0 z-50 w-full bg-white/60 backdrop-blur-md">
             <Header/>
             <div className="flex w-full items-center justify-between py-2 px-4">
                 {/* Mobile Navigation */}

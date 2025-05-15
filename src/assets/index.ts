@@ -2,10 +2,14 @@ import BlackWomen from "./blackwomen.png";
 import BlackWomanOrangeBackground from "./blackwoman-orangebg.png"
 import BlackWomanBeigeBackground from "./bw-beigebg.png"
 import WomenGroup from "./womengroup.png"
+import WomanBlackBackground from "./woman-black-background.png"
+import WomanInTheWild from "./woman-in-the-wild.png"
 
 export {
     BlackWomen,
     BlackWomanOrangeBackground,
     BlackWomanBeigeBackground,
-    WomenGroup
+    WomenGroup,
+    WomanBlackBackground,
+    WomanInTheWild
 }

@@ -10,6 +10,7 @@ import LoginPage from "@/pages/auth/login.tsx";
 import ResetPasswordPage from "@/pages/auth/reset-password.tsx";
 import SignUpPage from "@/pages/auth/sign-up.tsx";
 import VerifyPage from "@/pages/auth/verify.tsx";
+import ContactPage from "@/pages/contact.tsx";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path=":productId" element={<ProductPage/>}/>
                     </Route>
                     <Route path="cart" element={<CartPage/>}/>
+                    <Route path="contact" element={<ContactPage/>}/>
 
                     <Route path="auth">
                         <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
