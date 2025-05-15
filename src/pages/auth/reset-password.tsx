@@ -100,7 +100,7 @@ export default function ResetPasswordPage() {
     // If token is invalid, show error
     if (!isValidToken) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center p-6">
+            <div className="flex-1 flex flex-col items-center justify-center p-6">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
                         <Link to="/" className="inline-block">

@@ -15,8 +15,11 @@ import { Link, useNavigate } from "react-router"
 import PasswordStrengthMeter from "@/components/pages/sign-up/password-strength-meter"
 import SocialLoginButtons from "@/components/pages/sign-up/social-login-buttons"
 import { z } from "zod"
+import {useIsMobile} from "@/hooks/use-mobile.ts";
 
 export default function SignUpPage() {
+
+    const isMobile = useIsMobile()
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -101,7 +104,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="flex flex-1 flex-col">
             <div className="flex-1 flex flex-col lg:flex-row">
                 {/* Left side - Form */}
                 <motion.div
@@ -112,7 +115,7 @@ export default function SignUpPage() {
                 >
                     <div className="w-full max-w-md space-y-8">
                         <div className="text-center mb-8">
-                            <Link to="/" className="inline-block">
+                            <Link to="/" className={`${isMobile? "hidden":"inline-block"}`}>
                                 <span className="text-2xl font-bold tracking-tight">GHBI</span>
                             </Link>
                             <h1 className="mt-6 text-3xl font-semibold tracking-tight">Create an account</h1>

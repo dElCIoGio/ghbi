@@ -12,8 +12,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { loginSchema, type LoginFormValues } from "@/lib/validations/auth"
 import { Link, useNavigate, useSearchParams } from "react-router"
 import SocialLoginButtons from "@/components/pages/sign-up/social-login-buttons"
+import {useIsMobile} from "@/hooks/use-mobile.ts";
 
 export default function LoginPage() {
+
+    const isMobile = useIsMobile()
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const registered = searchParams.get("registered")
@@ -83,7 +86,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="flex flex-col">
             <div className="flex-1 flex flex-col lg:flex-row">
                 {/* Left side - Image */}
                 <div className="hidden lg:block lg:w-1/2 relative">
@@ -104,17 +107,17 @@ export default function LoginPage() {
 
                 {/* Right side - Form */}
                 <motion.div
-                    className="flex-1 flex flex-col justify-center items-center p-6 sm:p-10"
+                    className="flex-1 flex flex-col justify-center items-center p-6 sm:p-4"
                     initial="hidden"
                     animate="visible"
                     variants={fadeIn}
                 >
                     <div className="w-full max-w-md space-y-8">
                         <div className="text-center mb-8">
-                            <Link to="/" className="inline-block">
+                            <Link to="/" className={`${isMobile? "hidden":"inline-block"}`}>
                                 <span className="text-2xl font-bold tracking-tight">GHBI</span>
                             </Link>
-                            <h1 className="mt-6 text-3xl font-semibold tracking-tight">Sign in</h1>
+                            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Sign in</h1>
                             <p className="mt-2 text-sm text-muted-foreground">Welcome back to Glossy Hair By Isis</p>
                         </div>
 
