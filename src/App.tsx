@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router";
+import {Routes, Route, useLocation} from "react-router";
 import RootLayout from "@/components/layouts/root/root-layout.tsx";
 import LandingPage from "@/pages/landing-page.tsx";
 import AboutUs from "@/pages/about-us.tsx";
@@ -11,8 +11,16 @@ import ResetPasswordPage from "@/pages/auth/reset-password.tsx";
 import SignUpPage from "@/pages/auth/sign-up.tsx";
 import VerifyPage from "@/pages/auth/verify.tsx";
 import ContactPage from "@/pages/contact.tsx";
+import {useEffect} from "react";
 
 function App() {
+
+    const location = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+
     return (
         <div>
             <Routes>
