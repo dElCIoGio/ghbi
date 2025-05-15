@@ -1,7 +1,7 @@
 import {Bag, UserCircle, List} from "@phosphor-icons/react";
 import {Button} from "@/components/ui/button.tsx";
-import {Link} from "react-router";
-import {useState} from "react";
+import {Link, useLocation} from "react-router";
+import {useEffect, useState} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet.tsx";
 import {useIsMobile} from "@/hooks/use-mobile.ts";
@@ -32,19 +32,27 @@ function Navbar() {
 
     const isMobile = useIsMobile();
 
+    const [isSheet, setIsSheet] = useState<boolean>(false)
+
+    const location = useLocation();
+
+    useEffect(() => {
+        setIsSheet(false)
+    }, [location]);
+
     return (
         <nav className="sticky top-0 z-50 w-full bg-white/60 backdrop-blur-md">
             <Header/>
             <div className="flex w-full items-center justify-between py-2 px-4">
                 {/* Mobile Navigation */}
                 <div className="md:hidden">
-                    <Sheet>
+                    <Sheet open={isSheet} onOpenChange={setIsSheet}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="text-zinc-500 hover:text-black">
                                 <List className="w-6 h-6"/>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                        <SheetContent side="right" className="w-[300px] px-2 pt-4 sm:w-[400px]">
                             <div className="flex flex-col space-y-4 mt-8">
                                 {navlinks.map(link => (
                                     <Button asChild variant="ghost" key={link.href} className="justify-start">
