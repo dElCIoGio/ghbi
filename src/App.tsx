@@ -4,6 +4,7 @@ import LandingPage from "@/pages/landing-page.tsx";
 import AboutUs from "@/pages/about-us.tsx";
 import Listing from "@/pages/shop/listing.tsx";
 import ProductPage from "@/pages/shop/item.tsx";
+import CartPage from "@/pages/cart.tsx";
 
 function App() {
     return (
@@ -17,9 +18,8 @@ function App() {
                     <Route path="shop">
                         <Route index element={<Listing/>}/>
                         <Route path=":productId" element={<ProductPage/>}/>
-
-
                     </Route>
+                    <Route path="cart" element={<CartPage/>}/>
 
                 </Route>
 
