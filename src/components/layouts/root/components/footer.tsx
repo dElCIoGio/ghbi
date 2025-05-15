@@ -8,10 +8,10 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-12">
         {/* Top nav links */}
         <nav className="flex flex-wrap gap-8 text-sm font-semibold tracking-widest uppercase justify-center md:justify-start">
-          <a href="#contact" className="hover:underline">Contact</a>
-          <a href="#work" className="hover:underline">Work</a>
-          <a href="#insights" className="hover:underline">Insights</a>
-          <a href="#careers" className="hover:underline">Careers & Culture</a>
+          <a href="#contact" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Instagram</a>
+          <a href="#work" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Facebook</a>
+          <a href="#insights" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">X</a>
+          <a href="#careers" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Tik tok</a>
         </nav>
 
         {/* Main content */}

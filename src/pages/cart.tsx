@@ -603,9 +603,11 @@ export default function CartPage() {
                                 </div>
 
                                 {/* Checkout Button */}
-                                <Button size="lg" className="w-full">
-                                    <ShoppingBag className="h-4 w-4 mr-2" />
-                                    Proceed to Checkout
+                                <Button asChild size="lg" className="w-full">
+                                    <Link to="/checkout">
+                                        <ShoppingBag className="h-4 w-4 mr-2" />
+                                        Proceed to Checkout
+                                    </Link>
                                 </Button>
 
                                 {/* Secure Checkout */}

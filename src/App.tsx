@@ -12,6 +12,7 @@ import SignUpPage from "@/pages/auth/sign-up.tsx";
 import VerifyPage from "@/pages/auth/verify.tsx";
 import ContactPage from "@/pages/contact.tsx";
 import {useEffect} from "react";
+import CheckoutPage from "@/pages/checkout.tsx";
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
     }, [location]);
 
     return (
-        <div>
+        <div className="font-poppins">
             <Routes>
 
                 {/* Root */}
@@ -35,6 +36,7 @@ function App() {
                     </Route>
                     <Route path="cart" element={<CartPage/>}/>
                     <Route path="contact" element={<ContactPage/>}/>
+                    <Route path="checkout" element={<CheckoutPage/>}/>
 
                     <Route path="auth">
                         <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
