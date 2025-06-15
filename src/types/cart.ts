@@ -1,8 +1,8 @@
-import type { ProductColor, ProductLength, ProductTexture } from "./product"
+import type { ProductColor, ProductLength } from "./product"
 
 export interface CartItem {
-    id: number
-    productId: number
+    id: string // variant id
+    productId: string
     name: string
     slug: string
     image: string
@@ -12,7 +12,6 @@ export interface CartItem {
     maxQuantity: number
     selectedColor: ProductColor
     selectedLength: ProductLength
-    selectedTexture: ProductTexture
     sku: string
 }
 

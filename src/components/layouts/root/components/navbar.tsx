@@ -1,10 +1,10 @@
 import {Bag, UserCircle, List} from "@phosphor-icons/react";
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "@/components/ui/button";
 import {Link, useLocation} from "react-router";
 import {useEffect, useState} from "react";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet.tsx";
-import {useIsMobile} from "@/hooks/use-mobile.ts";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import {useIsMobile} from "@/hooks/use-mobile";
 
 const navlinks: {
     name: string,
@@ -42,7 +42,6 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 w-full bg-white/60 backdrop-blur-md">
-            <Header/>
             <div className="flex w-full items-center justify-between py-2 px-4">
                 {/* Mobile Navigation */}
                 <div className="md:hidden">
@@ -81,7 +80,7 @@ function Navbar() {
                         {
                             navlinks.map(link => (
                                 <Button asChild variant="link" size="sm" key={link.href}>
-                                    <Link to={link.href} className="text-sm font-jost font-medium">
+                                    <Link to={link.href} className="text-sm font-inter lowercase font-medium">
                                         {link.name}
                                     </Link>
                                 </Button>
@@ -134,14 +133,5 @@ function RegionDropdown() {
     )
 }
 
-function Header() {
-
-
-    return (
-        <div className="text-white bg-zinc-800 text-center text-xs py-1">
-            FREE SHIPPING ON ALL ORDERS OVER <span className="text-pink-200">$100</span>
-        </div>
-    )
-}
 
 export default Navbar;

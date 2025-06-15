@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 
@@ -9,13 +9,12 @@ function Footer() {
         {/* Top nav links */}
         <nav className="flex flex-wrap gap-8 text-sm font-semibold tracking-widest uppercase justify-center md:justify-start">
           <a href="#contact" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Instagram</a>
-          <a href="#work" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Facebook</a>
-          <a href="#insights" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">X</a>
           <a href="#careers" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Tik tok</a>
         </nav>
 
         {/* Main content */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-12">
+          
           {/* Left: Join for insights */}
           <div className="flex-1 min-w-[250px]">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-jost font-bold mb-8">JOIN FOR MONTHLY INSIGHTS</h2>

@@ -11,7 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { resetPasswordSchema, type ResetPasswordFormValues } from "@/lib/validations/auth"
 import type { PasswordStrength } from "@/types/auth"
-import PasswordStrengthMeter from "@/components/pages/sign-up/password-strength-meter.tsx";
+import PasswordStrengthMeter from "@/components/pages/sign-up/password-strength-meter";
 
 export default function ResetPasswordPage() {
     const navigate = useNavigate()

@@ -81,7 +81,7 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
                                         <img
                                             src={activeImage.url || "/placeholder.svg"}
                                             alt={activeImage.alt}
-                                            className={`object-cover transition-transform duration-200 ${
+                                            className={`w-full h-full object-cover transition-transform duration-200 ${
                                                 isZooming && !isMobile ? "scale-125" : ""
                                             }`}
                                             style={

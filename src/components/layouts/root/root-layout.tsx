@@ -1,6 +1,6 @@
-import Navbar from "@/components/layouts/root/components/navbar.tsx";
+import Navbar from "@/components/layouts/root/components/navbar";
 import {Outlet} from "react-router";
-import Footer from "@/components/layouts/root/components/footer.tsx";
+import Footer from "@/components/layouts/root/components/footer";
 
 function RootLayout() {
     return (

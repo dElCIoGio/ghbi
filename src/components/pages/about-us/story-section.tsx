@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "@/components/ui/button";
 
 export interface StorySectionProps {
     /** URL or import of the background image */

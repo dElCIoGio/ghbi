@@ -91,7 +91,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
                         className="group relative min-w-[240px] max-w-[240px] overflow-hidden rounded-lg border bg-background p-2 flex-shrink-0"
                         whileHover={{ y: -5 }}
                     >
-                        <Link to={`/shop/${product.id}`} className="block">
+                        <Link to={`/shop/${product.slug}`} className="block">
                             <div className="relative aspect-square overflow-hidden rounded-md">
                                 <img
                                     src={product.image || "/placeholder.svg"}

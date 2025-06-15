@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router"
 import PasswordStrengthMeter from "@/components/pages/sign-up/password-strength-meter"
 import SocialLoginButtons from "@/components/pages/sign-up/social-login-buttons"
 import { z } from "zod"
-import {useIsMobile} from "@/hooks/use-mobile.ts";
+import {useIsMobile} from "@/hooks/use-mobile";
 
 export default function SignUpPage() {
 

@@ -1,18 +1,20 @@
 import {Routes, Route, useLocation} from "react-router";
-import RootLayout from "@/components/layouts/root/root-layout.tsx";
-import LandingPage from "@/pages/landing-page.tsx";
-import AboutUs from "@/pages/about-us.tsx";
-import Listing from "@/pages/shop/listing.tsx";
-import ProductPage from "@/pages/shop/item.tsx";
-import CartPage from "@/pages/cart.tsx";
-import ForgotPasswordPage from "@/pages/auth/forgot-password.tsx";
-import LoginPage from "@/pages/auth/login.tsx";
-import ResetPasswordPage from "@/pages/auth/reset-password.tsx";
-import SignUpPage from "@/pages/auth/sign-up.tsx";
-import VerifyPage from "@/pages/auth/verify.tsx";
-import ContactPage from "@/pages/contact.tsx";
+import RootLayout from "@/components/layouts/root/root-layout";
+import LandingPage from "@/pages/landing-page";
+import AboutUs from "@/pages/about-us";
+import Listing from "@/pages/shop/listing";
+import ProductPage from "@/pages/shop/item";
+import CartPage from "@/pages/cart";
+import ForgotPasswordPage from "@/pages/auth/forgot-password";
+import LoginPage from "@/pages/auth/login";
+import ResetPasswordPage from "@/pages/auth/reset-password";
+import SignUpPage from "@/pages/auth/sign-up";
+import VerifyPage from "@/pages/auth/verify";
+import ContactPage from "@/pages/contact";
 import {useEffect} from "react";
-import CheckoutPage from "@/pages/checkout.tsx";
+import CheckoutPage from "@/pages/checkout";
+import Test from "@/pages/test";
+
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
     return (
         <div className="font-poppins">
             <Routes>
+                <Route path="test" element={<Test/>}/>
 
                 {/* Root */}
                 <Route path="/" element={<RootLayout/>}>

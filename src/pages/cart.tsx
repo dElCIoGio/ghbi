@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
@@ -26,192 +25,45 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import type { CartState, CartItem, DiscountCode } from "@/types/cart"
+import type { DiscountCode } from "@/types/cart"
 import type { RelatedProduct } from "@/types/product"
-import {Link} from "react-router";
-import RelatedProducts from "@/components/pages/shop-item/related-products.tsx";
+import {Link} from "react-router"
+import RelatedProducts from "@/components/pages/shop-item/related-products"
+import {useCart} from "@/hooks/use-cart"
 
 export default function CartPage() {
-    const [cartState, setCartState] = useState<CartState>({
-        items: [],
-        summary: {
-            subtotal: 0,
-            shipping: 0,
-            tax: 0,
-            discount: 0,
-            total: 0,
-        },
-        discountCode: null,
-        isLoading: true,
-        error: null,
-    })
     const [discountInput, setDiscountInput] = useState("")
     const [isApplyingDiscount, setIsApplyingDiscount] = useState(false)
     const [discountError, setDiscountError] = useState<string | null>(null)
     const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([])
-    const [isUpdatingCart, setIsUpdatingCart] = useState(false)
-
-    // Sample cart data
-    const sampleCartItems: CartItem[] = [
-        {
-            id: 1,
-            productId: 1,
-            name: "Silky Straight Lace Front Wig",
-            slug: "silky-straight-lace-front-wig",
-            image: "/placeholder.svg?height=400&width=300&text=Wig%201",
-            price: 269.99,
-            originalPrice: 299.99,
-            quantity: 1,
-            maxQuantity: 10,
-            selectedColor: { id: 1, name: "Natural Black", value: "#0f0f0f", inStock: true },
-            selectedLength: { id: 2, value: "16 inches", inStock: true },
-            selectedTexture: { id: 1, name: "Silky Straight", value: "silky-straight", inStock: true },
-            sku: "GHBI-LFW-001",
-        },
-        {
-            id: 2,
-            productId: 4,
-            name: "Blonde Straight Clip-in Extensions",
-            slug: "blonde-straight-clip-in-extensions",
-            image: "/placeholder.svg?height=400&width=300&text=Extension%201",
-            price: 159.99,
-            quantity: 2,
-            maxQuantity: 15,
-            selectedColor: { id: 5, name: "Blonde", value: "#d4b16a", inStock: true },
-            selectedLength: { id: 3, value: "20 inches", inStock: true },
-            selectedTexture: { id: 1, name: "Silky Straight", value: "silky-straight", inStock: true },
-            sku: "GHBI-EXT-004",
-        },
-    ]
+    const [discountCode, setDiscountCode] = useState<DiscountCode | null>(null)
+    const { cart, isLoading, removeFromCart, updateQuantity, getCartTotal } = useCart()
 
     // Sample related products
     const sampleRelatedProducts: RelatedProduct[] = [
-        {
-            id: 2,
-            name: "Body Wave Full Lace Wig",
-            price: 349.99,
-            image: "/placeholder.svg?height=400&width=300&text=Body%20Wave",
-            rating: 4.7,
-            reviewCount: 98,
-        },
-        {
-            id: 3,
-            name: "Curly Closure Wig",
-            price: 279.99,
-            image: "/placeholder.svg?height=400&width=300&text=Curly%20Closure",
-            rating: 4.5,
-            reviewCount: 42,
-            isNew: true,
-        },
-        {
-            id: 12,
-            name: "Bob Style Wig",
-            price: 229.99,
-            image: "/placeholder.svg?height=400&width=300&text=Bob%20Style",
-            rating: 4.9,
-            reviewCount: 108,
-            discount: 10,
-            isBestseller: true,
-        },
-        {
-            id: 14,
-            name: "Afro Kinky Curly Wig",
-            price: 279.99,
-            image: "/placeholder.svg?height=400&width=300&text=Kinky%20Curly",
-            rating: 4.8,
-            reviewCount: 92,
-        },
+
     ]
 
-    // Load cart data
+    // Load related products
     useEffect(() => {
-        // Simulate API call to fetch cart data
-        setTimeout(() => {
-            const subtotal = sampleCartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-            const shipping = subtotal > 150 ? 0 : 15
-            const tax = subtotal * 0.08 // 8% tax rate
-            const total = subtotal + shipping + tax
-
-            setCartState({
-                items: sampleCartItems,
-                summary: {
-                    subtotal,
-                    shipping,
-                    tax,
-                    discount: 0,
-                    total,
-                },
-                discountCode: null,
-                isLoading: false,
-                error: null,
-            })
-
-            setRelatedProducts(sampleRelatedProducts)
-        }, 800)
+        setRelatedProducts(sampleRelatedProducts)
     }, [])
 
-    // Update cart summary when items change
-    useEffect(() => {
-        if (!cartState.isLoading) {
-            const subtotal = cartState.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-            const shipping = subtotal > 150 ? 0 : 15
-            const tax = subtotal * 0.08 // 8% tax rate
-            let discount = 0
+    // Calculate cart summary
+    const subtotal = getCartTotal()
+    const shipping = subtotal > 150 ? 0 : 15
+    const tax = subtotal * 0.08 // 8% tax rate
+    let discount = 0
 
-            if (cartState.discountCode) {
-                if (cartState.discountCode.type === "percentage") {
-                    discount = subtotal * (cartState.discountCode.value / 100)
-                } else if (cartState.discountCode.type === "fixed") {
-                    discount = cartState.discountCode.value
-                }
-            }
-
-            const total = subtotal + shipping + tax - discount
-
-            setCartState((prev) => ({
-                ...prev,
-                summary: {
-                    subtotal,
-                    shipping,
-                    tax,
-                    discount,
-                    total,
-                },
-            }))
+    if (discountCode) {
+        if (discountCode.type === "percentage") {
+            discount = subtotal * (discountCode.value / 100)
+        } else if (discountCode.type === "fixed") {
+            discount = discountCode.value
         }
-    }, [cartState.items, cartState.discountCode])
-
-    // Handle quantity change
-    const handleQuantityChange = (itemId: number, newQuantity: number) => {
-        if (newQuantity < 1) return
-
-        setIsUpdatingCart(true)
-
-        // Simulate API call to update cart
-        setTimeout(() => {
-            setCartState((prev) => ({
-                ...prev,
-                items: prev.items.map((item) =>
-                    item.id === itemId ? { ...item, quantity: Math.min(newQuantity, item.maxQuantity) } : item,
-                ),
-            }))
-            setIsUpdatingCart(false)
-        }, 300)
     }
 
-    // Handle remove item
-    const handleRemoveItem = (itemId: number) => {
-        setIsUpdatingCart(true)
-
-        // Simulate API call to remove item
-        setTimeout(() => {
-            setCartState((prev) => ({
-                ...prev,
-                items: prev.items.filter((item) => item.id !== itemId),
-            }))
-            setIsUpdatingCart(false)
-        }, 300)
-    }
+    const total = subtotal + shipping + tax - discount
 
     // Handle apply discount code
     const handleApplyDiscount = () => {
@@ -248,16 +100,13 @@ export default function CartPage() {
                 },
             }
 
-            const discountCode = validDiscountCodes[discountInput.toUpperCase()]
+            const newDiscountCode = validDiscountCodes[discountInput.toUpperCase()]
 
-            if (discountCode) {
-                if (discountCode.minimumPurchase && cartState.summary.subtotal < discountCode.minimumPurchase) {
-                    setDiscountError(`This code requires a minimum purchase of $${discountCode.minimumPurchase}`)
+            if (newDiscountCode) {
+                if (newDiscountCode.minimumPurchase && subtotal < newDiscountCode.minimumPurchase) {
+                    setDiscountError(`This code requires a minimum purchase of $${newDiscountCode.minimumPurchase}`)
                 } else {
-                    setCartState((prev) => ({
-                        ...prev,
-                        discountCode,
-                    }))
+                    setDiscountCode(newDiscountCode)
                     setDiscountInput("")
                 }
             } else {
@@ -270,10 +119,7 @@ export default function CartPage() {
 
     // Handle remove discount code
     const handleRemoveDiscount = () => {
-        setCartState((prev) => ({
-            ...prev,
-            discountCode: null,
-        }))
+        setDiscountCode(null)
     }
 
     // Format price
@@ -301,7 +147,7 @@ export default function CartPage() {
         },
     }
 
-    if (cartState.isLoading) {
+    if (isLoading) {
         return (
             <div className="flex flex-col">
                 <div className="flex-1 py-8">
@@ -324,7 +170,7 @@ export default function CartPage() {
     }
 
     // Empty cart state
-    if (cartState.items.length === 0) {
+    if (cart.length === 0) {
         return (
             <div className="flex flex-col">
                 <div className="flex-1 py-8">
@@ -389,29 +235,40 @@ export default function CartPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Cart Items */}
                         <div className="md:col-span-2">
-                            <motion.div className="space-y-6" initial="hidden" animate="visible" variants={staggerContainer}>
-                                {cartState.items.map((item) => (
+
+                            <div className=" flex justify-between items-center">
+                                <Button variant="ghost" asChild>
+                                    <Link to="/shop">
+                                        <ArrowRight className="h-4 w-4 mr-2 rotate-180"/>
+                                        Continue Shopping
+                                    </Link>
+                                </Button>
+                                <div className="text-sm text-muted-foreground">
+                                    {cart.length} {cart.length === 1 ? "item" : "items"} in your cart
+                                </div>
+                            </div>
+                            <motion.div className="space-y-6 mt-8" initial="hidden" animate="visible"
+                                        variants={staggerContainer}>
+                                {cart.map((item) => (
                                     <motion.div
                                         key={item.id}
                                         className="flex flex-col sm:flex-row gap-4 border rounded-lg p-4 relative"
                                         variants={fadeIn}
                                     >
-                                        {isUpdatingCart && (
-                                            <div className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg z-10">
-                                                <RefreshCw className="h-6 w-6 animate-spin text-primary" />
-                                            </div>
-                                        )}
-                                        <div className="relative h-32 sm:h-auto sm:w-32 rounded-md overflow-hidden shrink-0">
+                                        <div
+                                            className="relative h-32 sm:h-auto sm:w-32 rounded-md overflow-hidden shrink-0">
                                             <img src={item.image || "/placeholder.svg"} alt={item.name}
                                                  className="object-cover w-full h-full"/>
                                         </div>
                                         <div className="flex-1 space-y-2">
                                             <div className="flex justify-between">
-                                                <Link to={`/shop/${item.slug}`} className="font-medium hover:text-primary transition-colors">
+                                                <Link to={`/shop/${item.slug}`}
+                                                      className="font-medium hover:text-primary transition-colors">
                                                     {item.name}
                                                 </Link>
                                                 <div className="flex items-baseline gap-2">
-                                                    <span className="font-bold">${formatPrice(item.price * item.quantity)}</span>
+                                                    <span
+                                                        className="font-bold">${formatPrice(item.price * item.quantity)}</span>
                                                     {item.originalPrice && (
                                                         <span className="text-sm text-muted-foreground line-through">
                               ${formatPrice(item.originalPrice * item.quantity)}
@@ -423,7 +280,6 @@ export default function CartPage() {
                                                 <div className="flex flex-wrap gap-x-4 gap-y-1">
                                                     <span>Color: {item.selectedColor.name}</span>
                                                     <span>Length: {item.selectedLength.value}</span>
-                                                    <span>Texture: {item.selectedTexture.name}</span>
                                                 </div>
                                                 <div className="mt-1">
                                                     <span>SKU: {item.sku}</span>
@@ -435,29 +291,31 @@ export default function CartPage() {
                                                         variant="outline"
                                                         size="icon"
                                                         className="h-8 w-8 rounded-r-none"
-                                                        onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                                                        disabled={item.quantity <= 1 || isUpdatingCart}
+                                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                        disabled={item.quantity <= 1}
                                                     >
-                                                        <Minus className="h-3 w-3" />
+                                                        <Minus className="h-3 w-3"/>
                                                     </Button>
-                                                    <div className="h-8 px-3 flex items-center justify-center border-y w-12 text-center">
+                                                    <div
+                                                        className="h-8 px-3 flex items-center justify-center border-y w-12 text-center">
                                                         {item.quantity}
                                                     </div>
                                                     <Button
                                                         variant="outline"
                                                         size="icon"
                                                         className="h-8 w-8 rounded-l-none"
-                                                        onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                                        disabled={item.quantity >= item.maxQuantity || isUpdatingCart}
+                                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                        disabled={item.quantity >= item.maxQuantity}
                                                     >
-                                                        <Plus className="h-3 w-3" />
+                                                        <Plus className="h-3 w-3"/>
                                                     </Button>
                                                     {item.quantity >= item.maxQuantity && (
                                                         <TooltipProvider>
                                                             <Tooltip>
                                                                 <TooltipTrigger asChild>
-                                                                    <div className="ml-2 text-xs text-amber-500 flex items-center">
-                                                                        <AlertCircle className="h-3 w-3 mr-1" />
+                                                                    <div
+                                                                        className="ml-2 text-xs text-amber-500 flex items-center">
+                                                                        <AlertCircle className="h-3 w-3 mr-1"/>
                                                                         Max quantity
                                                                     </div>
                                                                 </TooltipTrigger>
@@ -473,14 +331,13 @@ export default function CartPage() {
                                                         variant="ghost"
                                                         size="sm"
                                                         className="h-8 text-xs"
-                                                        onClick={() => handleRemoveItem(item.id)}
-                                                        disabled={isUpdatingCart}
+                                                        onClick={() => removeFromCart(item.id)}
                                                     >
-                                                        <Trash2 className="h-3 w-3 mr-1" />
+                                                        <Trash2 className="h-3 w-3 mr-1"/>
                                                         Remove
                                                     </Button>
                                                     <Button variant="ghost" size="sm" className="h-8 text-xs">
-                                                        <Heart className="h-3 w-3 mr-1" />
+                                                        <Heart className="h-3 w-3 mr-1"/>
                                                         Save
                                                     </Button>
                                                 </div>
@@ -490,17 +347,7 @@ export default function CartPage() {
                                 ))}
                             </motion.div>
 
-                            <div className="mt-8 flex justify-between items-center">
-                                <Button variant="outline" asChild>
-                                    <Link to="/shop">
-                                        <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
-                                        Continue Shopping
-                                    </Link>
-                                </Button>
-                                <div className="text-sm text-muted-foreground">
-                                    {cartState.items.length} {cartState.items.length === 1 ? "item" : "items"} in your cart
-                                </div>
-                            </div>
+
                         </div>
 
                         {/* Order Summary */}
@@ -516,13 +363,13 @@ export default function CartPage() {
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Subtotal</span>
-                                        <span>${formatPrice(cartState.summary.subtotal)}</span>
+                                        <span>${formatPrice(subtotal)}</span>
                                     </div>
 
-                                    {cartState.summary.shipping > 0 ? (
+                                    {shipping > 0 ? (
                                         <div className="flex justify-between">
                                             <span className="text-muted-foreground">Shipping</span>
-                                            <span>${formatPrice(cartState.summary.shipping)}</span>
+                                            <span>${formatPrice(shipping)}</span>
                                         </div>
                                     ) : (
                                         <div className="flex justify-between">
@@ -533,13 +380,13 @@ export default function CartPage() {
 
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Tax (8%)</span>
-                                        <span>${formatPrice(cartState.summary.tax)}</span>
+                                        <span>${formatPrice(tax)}</span>
                                     </div>
 
-                                    {cartState.summary.discount > 0 && (
+                                    {discount > 0 && (
                                         <div className="flex justify-between text-green-600">
                                             <span>Discount</span>
-                                            <span>-${formatPrice(cartState.summary.discount)}</span>
+                                            <span>-${formatPrice(discount)}</span>
                                         </div>
                                     )}
 
@@ -547,7 +394,7 @@ export default function CartPage() {
 
                                     <div className="flex justify-between font-bold text-lg">
                                         <span>Total</span>
-                                        <span>${formatPrice(cartState.summary.total)}</span>
+                                        <span>${formatPrice(total)}</span>
                                     </div>
                                 </div>
 
@@ -555,17 +402,17 @@ export default function CartPage() {
                                 <div className="space-y-3">
                                     <h3 className="font-medium">Discount Code</h3>
 
-                                    {cartState.discountCode ? (
+                                    {discountCode ? (
                                         <div className="flex items-center justify-between bg-primary/5 border border-primary/20 rounded-md p-3">
                                             <div className="flex items-center">
                                                 <CheckCircle2 className="h-4 w-4 text-green-600 mr-2" />
                                                 <div>
-                                                    <div className="font-medium">{cartState.discountCode.code}</div>
+                                                    <div className="font-medium">{discountCode.code}</div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        {cartState.discountCode.type === "percentage"
-                                                            ? `${cartState.discountCode.value}% off`
-                                                            : cartState.discountCode.type === "fixed"
-                                                                ? `$${cartState.discountCode.value} off`
+                                                        {discountCode.type === "percentage"
+                                                            ? `${discountCode.value}% off`
+                                                            : discountCode.type === "fixed"
+                                                                ? `$${discountCode.value} off`
                                                                 : "Free shipping"}
                                                     </div>
                                                 </div>
@@ -632,12 +479,12 @@ export default function CartPage() {
                                 </div>
 
                                 {/* Free Shipping Alert */}
-                                {cartState.summary.subtotal < 150 && (
+                                {subtotal < 150 && (
                                     <Alert className="bg-primary/5 border-primary/20">
                                         <AlertCircle className="h-4 w-4 text-primary" />
                                         <AlertTitle>Free shipping available</AlertTitle>
                                         <AlertDescription>
-                                            Add ${formatPrice(150 - cartState.summary.subtotal)} more to qualify for free shipping.
+                                            Add ${formatPrice(150 - subtotal)} more to qualify for free shipping.
                                         </AlertDescription>
                                     </Alert>
                                 )}
@@ -652,7 +499,6 @@ export default function CartPage() {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

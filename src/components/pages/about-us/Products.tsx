@@ -39,8 +39,8 @@ export function Products() {
 
                 <Tabs defaultValue="wigs" className="w-full">
                     <TabsList className="grid w-full grid-cols-2 mb-8">
-                        <TabsTrigger value="wigs">Wigs</TabsTrigger>
-                        <TabsTrigger value="extensions">Extensions</TabsTrigger>
+                        <TabsTrigger value="wigs">Wavy Bundles</TabsTrigger>
+                        <TabsTrigger value="extensions">Curly Bundles</TabsTrigger>
                     </TabsList>
                     <TabsContent value="wigs" className="space-y-4">
                         <motion.div

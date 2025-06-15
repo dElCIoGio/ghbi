@@ -33,24 +33,25 @@ import {
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert"
 import {Progress} from "@/components/ui/progress"
 import {addressSchema, checkoutSchema} from "@/lib/validations/checkout"
-import type {CartItem, CartSummary} from "@/types/cart"
+import type {CartSummary} from "@/types/cart"
 import type {Address, PaymentMethod, ShippingMethod} from "@/types/checkout"
 import {Link} from "react-router";
 import {z} from "zod";
+import {useCart} from "@/hooks/use-cart";
 
 
 export default function CheckoutPage() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+
+    const { cart, getCartTotal, isLoading } = useCart()
+
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
-    const [cartItems, setCartItems] = useState<CartItem[]>([])
     const [cartSummary, setCartSummary] = useState<CartSummary>({
-        subtotal: 0,
+        subtotal: getCartTotal(),
         shipping: 0,
         tax: 0,
         discount: 0,
-        total: 0,
+        total: getCartTotal(),
     })
     const [discountCode, setDiscountCode] = useState("")
     const [isApplyingDiscount, setIsApplyingDiscount] = useState(false)
@@ -58,9 +59,9 @@ export default function CheckoutPage() {
     const [savedAddresses, setSavedAddresses] = useState<Address[]>([])
     const [selectedShippingAddress, setSelectedShippingAddress] = useState<string | null>(null)
     const [selectedBillingAddress, setSelectedBillingAddress] = useState<string | null>(null)
-    const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([])
+    const [shippingMethods, ] = useState<ShippingMethod[]>([])
     const [selectedShippingMethod, setSelectedShippingMethod] = useState<string | null>(null)
-    const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([])
+    const [paymentMethods, ] = useState<PaymentMethod[]>([])
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
     const [showAddAddressDialog, setShowAddAddressDialog] = useState(false)
     const [addressType, setAddressType] = useState<"shipping" | "billing">("shipping")
@@ -106,39 +107,6 @@ export default function CheckoutPage() {
             isDefault: false,
         },
     })
-
-    // Sample data for cart items
-    const sampleCartItems: CartItem[] = [
-        {
-            id: 1,
-            productId: 1,
-            name: "Silky Straight Lace Front Wig",
-            slug: "silky-straight-lace-front-wig",
-            image: "/placeholder.svg?height=400&width=300&text=Wig%201",
-            price: 269.99,
-            originalPrice: 299.99,
-            quantity: 1,
-            maxQuantity: 10,
-            selectedColor: { id: 1, name: "Natural Black", value: "#0f0f0f", inStock: true },
-            selectedLength: { id: 2, value: "16 inches", inStock: true },
-            selectedTexture: { id: 1, name: "Silky Straight", value: "silky-straight", inStock: true },
-            sku: "GHBI-LFW-001",
-        },
-        {
-            id: 2,
-            productId: 4,
-            name: "Blonde Straight Clip-in Extensions",
-            slug: "blonde-straight-clip-in-extensions",
-            image: "/placeholder.svg?height=400&width=300&text=Extension%201",
-            price: 159.99,
-            quantity: 2,
-            maxQuantity: 15,
-            selectedColor: { id: 5, name: "Blonde", value: "#d4b16a", inStock: true },
-            selectedLength: { id: 3, value: "20 inches", inStock: true },
-            selectedTexture: { id: 1, name: "Silky Straight", value: "silky-straight", inStock: true },
-            sku: "GHBI-EXT-004",
-        },
-    ]
 
     // Sample data for shipping methods
     const sampleShippingMethods: ShippingMethod[] = [
@@ -186,102 +154,6 @@ export default function CheckoutPage() {
             icon: "apple-pay",
         },
     ]
-
-    // Sample data for saved addresses (for authenticated users)
-    const sampleSavedAddresses: Address[] = [
-        {
-            id: "address-1",
-            name: "Home",
-            addressLine1: "123 Main Street",
-            addressLine2: "Apt 4B",
-            city: "Los Angeles",
-            state: "CA",
-            postalCode: "90001",
-            country: "US",
-            isDefault: true,
-        },
-        {
-            id: "address-2",
-            name: "Work",
-            addressLine1: "456 Office Plaza",
-            addressLine2: "Suite 200",
-            city: "Los Angeles",
-            state: "CA",
-            postalCode: "90012",
-            country: "US",
-            isDefault: false,
-        },
-    ]
-
-    // Load cart data and check authentication status
-    useEffect(() => {
-        // Simulate API call to fetch cart data and check authentication
-        const fetchData = async () => {
-            try {
-                // Simulate API delay
-                await new Promise((resolve) => setTimeout(resolve, 1000))
-
-                // Check if user is authenticated (simulated)
-                const userAuth = Math.random() > 0.5 // Randomly determine auth status for demo
-                setIsAuthenticated(userAuth)
-
-                // Set cart items
-                setCartItems(sampleCartItems)
-
-                // Calculate cart summary
-                const subtotal = sampleCartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-                const shipping = 0 // Will be set when shipping method is selected
-                const tax = subtotal * 0.08 // 8% tax rate
-                const total = subtotal + shipping + tax
-
-                setCartSummary({
-                    subtotal,
-                    shipping,
-                    tax,
-                    discount: 0,
-                    total,
-                })
-
-                // Set shipping methods
-                setShippingMethods(sampleShippingMethods)
-
-                // Set payment methods
-                setPaymentMethods(samplePaymentMethods)
-
-                // If authenticated, set saved addresses
-                if (userAuth) {
-                    setSavedAddresses(sampleSavedAddresses)
-
-                    // Pre-fill form with user data
-                    checkoutForm.setValue("firstName", "Jane")
-                    checkoutForm.setValue("lastName", "Doe")
-                    checkoutForm.setValue("email", "jane.doe@example.com")
-                    checkoutForm.setValue("phone", "555-123-4567")
-
-                    // Set default shipping address if available
-                    const defaultAddress = sampleSavedAddresses.find((address) => address.isDefault)
-                    if (defaultAddress) {
-                        setSelectedShippingAddress(defaultAddress.id)
-                        checkoutForm.setValue("shippingAddressId", defaultAddress.id)
-
-                        // Also set as billing address if same billing address is checked
-                        if (sameBillingAddress) {
-                            setSelectedBillingAddress(defaultAddress.id)
-                            checkoutForm.setValue("billingAddressId", defaultAddress.id)
-                        }
-                    }
-                }
-
-                setIsLoading(false)
-            } catch (error) {
-                console.error("Error fetching data:", error)
-                toast.error("Failed to load checkout data")
-                setIsLoading(false)
-            }
-        }
-
-        fetchData()
-    }, [checkoutForm])
 
     // Update cart summary when shipping method changes
     useEffect(() => {
@@ -542,7 +414,7 @@ export default function CheckoutPage() {
     }
 
     // If cart is empty, show empty cart message
-    if (cartItems.length === 0) {
+    if (cart.length === 0) {
         return (
             <div className="min-h-screen bg-background">
                 <div className=" max-w-6xl py-8 px-4 md:py-12">
@@ -597,7 +469,7 @@ export default function CheckoutPage() {
                         <div className="w-full space-y-4">
                             <h2 className="text-xl font-semibold">Order Summary</h2>
                             <div className="space-y-4">
-                                {cartItems.map((item) => (
+                                {cart.map((item) => (
                                     <div key={item.id} className="flex gap-4 py-4 border-b">
                                         <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
                                             <img src={item.image || "/placeholder.svg"} alt={item.name}
@@ -607,7 +479,7 @@ export default function CheckoutPage() {
                                             <h3 className="font-medium">{item.name}</h3>
                                             <div className="text-sm text-muted-foreground">
                                                 <p>
-                                                    {item.selectedColor.name} / {item.selectedLength.value} / {item.selectedTexture.name}
+                                                    {item.selectedColor.name} / {item.selectedLength.value}
                                                 </p>
                                                 <p>Quantity: {item.quantity}</p>
                                             </div>
@@ -710,16 +582,15 @@ export default function CheckoutPage() {
                                         <div className="bg-white p-6 rounded-lg border shadow-sm">
                                             <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
 
-                                            {!isAuthenticated && (
-                                                <div className="mb-6">
-                                                    <p className="text-sm text-muted-foreground mb-2">
-                                                        Already have an account?{" "}
-                                                        <Link to="/auth/login" className="text-primary hover:underline">
-                                                            Log in
-                                                        </Link>
-                                                    </p>
-                                                </div>
-                                            )}
+                                            {/* TEMP */}
+                                            <div className="mb-6">
+                                                <p className="text-sm text-muted-foreground mb-2">
+                                                    Already have an account?{" "}
+                                                    <Link to="/auth/login" className="text-primary hover:underline">
+                                                        Log in
+                                                    </Link>
+                                                </p>
+                                            </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <FormField
@@ -781,8 +652,8 @@ export default function CheckoutPage() {
                                                 />
                                             </div>
 
-                                            {!isAuthenticated && (
-                                                <div className="space-y-4 mt-6">
+                                            {/* TEMP */}
+                                            <div className="space-y-4 mt-6">
                                                     <FormField
                                                         control={checkoutForm.control}
                                                         name="saveInfo"
@@ -839,7 +710,6 @@ export default function CheckoutPage() {
                                                         />
                                                     )}
                                                 </div>
-                                            )}
                                         </div>
 
                                         <div className="flex justify-end">
@@ -858,7 +728,7 @@ export default function CheckoutPage() {
                                         <div className="bg-white p-6 rounded-lg border shadow-sm">
                                             <h2 className="text-xl font-semibold mb-4">Shipping Address</h2>
 
-                                            {isAuthenticated && savedAddresses.length > 0 ? (
+                                            {savedAddresses.length > 0 ? (
                                                 <div className="space-y-4">
                                                     <RadioGroup value={selectedShippingAddress || ""} onValueChange={handleShippingAddressSelect}>
                                                         {savedAddresses.map((address) => (
@@ -968,7 +838,7 @@ export default function CheckoutPage() {
 
                                             {!sameBillingAddress && (
                                                 <div className="space-y-4 mt-4">
-                                                    {isAuthenticated && savedAddresses.length > 0 ? (
+                                                    {savedAddresses.length > 0 ? (
                                                         <div className="space-y-4">
                                                             <RadioGroup
                                                                 value={selectedBillingAddress || ""}
@@ -1509,7 +1379,7 @@ export default function CheckoutPage() {
                                             <h2 className="text-xl font-semibold mb-4">Order Items</h2>
 
                                             <div className="space-y-4">
-                                                {cartItems.map((item) => (
+                                                {cart.map((item) => (
                                                     <div key={item.id} className="flex gap-4 py-4 border-b">
                                                         <div className="relative h-20 w-20 rounded-md overflow-hidden flex-shrink-0">
                                                             <img
@@ -1526,7 +1396,7 @@ export default function CheckoutPage() {
                                                             <h3 className="font-medium">{item.name}</h3>
                                                             <div className="text-sm text-muted-foreground">
                                                                 <p>
-                                                                    {item.selectedColor.name} / {item.selectedLength.value} / {item.selectedTexture.name}
+                                                                    {item.selectedColor.name} / {item.selectedLength.value}
                                                                 </p>
                                                                 <p>Quantity: {item.quantity}</p>
                                                             </div>
@@ -1590,12 +1460,12 @@ export default function CheckoutPage() {
                                     <AccordionItem value="items" className="border-b-0">
                                         <AccordionTrigger className="py-2">
                       <span className="flex items-center">
-                        Items ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})
+                        Items ({cart.reduce((sum, item) => sum + item.quantity, 0)})
                       </span>
                                         </AccordionTrigger>
                                         <AccordionContent>
                                             <div className="space-y-3 mb-4">
-                                                {cartItems.map((item) => (
+                                                {cart.map((item) => (
                                                     <div key={item.id} className="flex justify-between text-sm">
                                                         <div className="flex-1">
                                                             <p className="font-medium">{item.name}</p>

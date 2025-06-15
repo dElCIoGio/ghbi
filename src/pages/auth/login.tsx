@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { loginSchema, type LoginFormValues } from "@/lib/validations/auth"
 import { Link, useNavigate, useSearchParams } from "react-router"
 import SocialLoginButtons from "@/components/pages/sign-up/social-login-buttons"
-import {useIsMobile} from "@/hooks/use-mobile.ts";
+import {useIsMobile} from "@/hooks/use-mobile";
 
 export default function LoginPage() {
 
@@ -50,7 +50,7 @@ export default function LoginPage() {
 
     const onSubmit = async (data: LoginFormValues) => {
         setIsSubmitting(true)
-        
+
         console.log(data)
 
         try {
