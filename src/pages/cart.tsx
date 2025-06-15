@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
 import {
     ShoppingBag,
@@ -30,6 +30,7 @@ import type { RelatedProduct } from "@/types/product"
 import {Link} from "react-router"
 import RelatedProducts from "@/components/pages/shop-item/related-products"
 import {useCart} from "@/hooks/use-cart"
+import { buildCheckoutUrl } from "@/lib/shopify/checkout"
 
 export default function CartPage() {
     const [discountInput, setDiscountInput] = useState("")
@@ -64,6 +65,8 @@ export default function CartPage() {
     }
 
     const total = subtotal + shipping + tax - discount
+
+    const checkoutUrl = useMemo(() => buildCheckoutUrl(cart), [cart])
 
     // Handle apply discount code
     const handleApplyDiscount = () => {
@@ -451,10 +454,10 @@ export default function CartPage() {
 
                                 {/* Checkout Button */}
                                 <Button asChild size="lg" className="w-full">
-                                    <Link to="/checkout">
+                                    <a href={checkoutUrl} rel="noopener noreferrer">
                                         <ShoppingBag className="h-4 w-4 mr-2" />
                                         Proceed to Checkout
-                                    </Link>
+                                    </a>
                                 </Button>
 
                                 {/* Secure Checkout */}
