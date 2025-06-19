@@ -24,9 +24,8 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
     const [isAddedToWishlist, setIsAddedToWishlist] = useState(false)
 
     const incrementQuantity = () => {
-        if (quantity < selectedOptions.quantityAvailable) {
-            setQuantity(quantity + 1)
-        }
+
+        setQuantity(quantity + 1)
     }
 
     const decrementQuantity = () => {
@@ -115,14 +114,11 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
                     <button
                         className="px-3 py-2 hover:bg-muted/50 transition-colors"
                         onClick={incrementQuantity}
-                        disabled={quantity >= selectedOptions.quantityAvailable}
+                        //disabled={quantity >= selectedOptions.quantityAvailable}
                     >
                         <Plus className="h-4 w-4" />
                     </button>
                 </div>
-                <span className="text-sm text-muted-foreground">
-                    {selectedOptions.quantityAvailable <= 0? "Not Available": "In Stock"}
-                </span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">

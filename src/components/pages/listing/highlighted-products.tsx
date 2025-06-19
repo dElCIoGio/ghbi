@@ -47,14 +47,18 @@ const renderRating = (rating: number) => {
 export function HighlightedProducts() {
     const { highlightedProducts, isLoading } = useProductsListingContext();
 
+    if (highlightedProducts.length == 0){
+        return (
+            <div></div>
+        )
+    }
+
     return (
         <section className="w-full py-8 md:py-12">
             <div className="px-4 md:px-6">
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold tracking-tight">Highlighted Products</h2>
-                    <Link to="#all-products" className="text-sm font-medium text-primary hover:underline">
-                        View All Products
-                    </Link>
+
                 </div>
 
                 {isLoading ? (

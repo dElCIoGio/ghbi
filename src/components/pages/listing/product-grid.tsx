@@ -150,14 +150,14 @@ export function ProductGrid() {
                                     {product.discount ? (
                                         <>
                                             <span className="font-bold">
-                                                ${(product.price * (1 - product.discount / 100)).toFixed(2)}
+                                                £{(product.price * (1 - product.discount / 100)).toFixed(2)}
                                             </span>
                                             <span className="ml-2 text-sm text-muted-foreground line-through">
-                                                ${product.price.toFixed(2)}
+                                                £{product.price.toFixed(2)}
                                             </span>
                                         </>
                                     ) : (
-                                        <span className="font-bold">${product.price.toFixed(2)}</span>
+                                        <span className="font-bold">£{product.price.toFixed(2)}</span>
                                     )}
                                 </div>
                             </div>

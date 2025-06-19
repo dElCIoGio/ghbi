@@ -88,7 +88,7 @@ export default function ProductPage() {
                         <ProductTabs />
 
                         {/* Related Products */}
-                        <div className="mt-16 w-full">
+                        <div className="mt-16 w-full hidden">
                             <RelatedProducts products={product.relatedProducts} />
                         </div>
                     </div>

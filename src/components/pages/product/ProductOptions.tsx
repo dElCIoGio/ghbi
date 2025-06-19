@@ -18,7 +18,7 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
 
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedLength, setSelectedLength] = useState<string | null>(null)
-    const [selectedTexture, setSelectedTexture] = useState<string | null>(null)
+    const [selectedTexture, ] = useState<string | null>(null)
 
     const selectedOptions = useMemo(() => {
         const options = []
@@ -46,17 +46,6 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
             color: colorValue,
             length: selectedLength,
             texture: selectedTexture,
-            price: currentPrice,
-            quantityAvailable
-        })
-    }
-
-    const handleTextureChange = (textureValue: string) => {
-        setSelectedTexture(textureValue)
-        onOptionChange({
-            color: selectedColor,
-            length: selectedLength,
-            texture: textureValue,
             price: currentPrice,
             quantityAvailable
         })
@@ -138,32 +127,6 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                 </div>
             </div>
 
-            {/* Texture Selection */}
-            <div>
-                <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">Texture</span>
-                    {selectedTexture && (
-                        <span className="text-sm text-muted-foreground">
-                            {selectedTexture}
-                        </span>
-                    )}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                    {product.textures.map((texture) => (
-                        <button
-                            key={texture.id}
-                            className={`px-4 py-2 rounded-md border transition-all ${
-                                !texture.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:bg-muted/50"
-                            } ${selectedTexture === texture.value ? "border-primary bg-primary/5" : "border-muted"}`}
-                            onClick={() => texture.inStock && handleTextureChange(texture.value)}
-                            disabled={!texture.inStock}
-                        >
-                            {texture.value}
-                        </button>
-                    ))}
-                </div>
-            </div>
         </div>
     )
 } 

@@ -44,12 +44,12 @@ const HeroSection = () => {
                     </Button>
                 </div>
 
-                <button>
+                <a href="#products">
                     <div className="mt-16 flex items-center gap-2 text-sm text-gray-400">
                         <span className="animate-bounce">↓</span>
-                        <span>Discover what makes us different</span>
+                        <span>Find More</span>
                     </div>
-                </button>
+                </a>
             </div>
 
             {/* ✅ Right: Image Section only for large screens */}

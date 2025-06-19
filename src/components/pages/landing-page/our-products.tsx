@@ -11,7 +11,7 @@ interface Props {
 const RecommendedProducts = ({products}: Props) => {
 
     return (
-        <section className="w-full bg-white py-20 px-6">
+        <section id="products" className="w-full bg-white py-20 px-6">
 
             {/* Heading */}
             <div className="text-center mb-16">

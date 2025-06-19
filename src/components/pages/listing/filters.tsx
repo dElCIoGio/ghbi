@@ -92,7 +92,7 @@ export function Filters() {
                         </div>
 
                         <Accordion type="multiple" className="w-full">
-                            <AccordionItem value="category">
+                            <AccordionItem className="hidden" value="category">
                                 <AccordionTrigger>Category</AccordionTrigger>
                                 <AccordionContent>
                                     <div className="space-y-2">
@@ -112,7 +112,7 @@ export function Filters() {
                                 </AccordionContent>
                             </AccordionItem>
 
-                            <AccordionItem value="type">
+                            <AccordionItem className="hidden" value="type">
                                 <AccordionTrigger>Type</AccordionTrigger>
                                 <AccordionContent>
                                     <div className="space-y-2">
@@ -132,7 +132,7 @@ export function Filters() {
                                 </AccordionContent>
                             </AccordionItem>
 
-                            <AccordionItem value="color">
+                            <AccordionItem className="hidden" value="color">
                                 <AccordionTrigger>Color</AccordionTrigger>
                                 <AccordionContent>
                                     <div className="space-y-2">
@@ -152,7 +152,7 @@ export function Filters() {
                                 </AccordionContent>
                             </AccordionItem>
 
-                            <AccordionItem value="texture">
+                            <AccordionItem className="hidden" value="texture">
                                 <AccordionTrigger>Texture</AccordionTrigger>
                                 <AccordionContent>
                                     <div className="space-y-2">

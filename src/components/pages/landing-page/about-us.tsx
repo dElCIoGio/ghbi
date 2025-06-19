@@ -1,4 +1,5 @@
 import {Button} from "@/components/ui/button";
+import {Link} from "react-router";
 
 
 const OurStorySection = () => {
@@ -14,8 +15,11 @@ const OurStorySection = () => {
                 <div className="w-full md:w-2/3 space-y-6">
                     <p className="text-gray-600 text-base leading-relaxed">
                         Behind every bundle is a bold woman rewriting her own rules. Whether it’s a glow-up moment, a fresh start, or just a vibe switch — our hair is there with you every step (and selfie) of the way.                    </p>
-                    <Button variant="secondary" className="font-semibold">
-                        Read Full Story
+                    <Button asChild variant="secondary" className="font-semibold">
+                        <Link to="about-us">
+                            Read Full Story
+                        </Link>
+
                     </Button>
                 </div>
             </div>

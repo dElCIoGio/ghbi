@@ -175,7 +175,7 @@ export default function CartPage() {
     // Empty cart state
     if (cart.length === 0) {
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col px-8">
                 <div className="flex-1 py-8">
                     <Breadcrumb className="mb-6">
                         <BreadcrumbList>
@@ -206,7 +206,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Related Products */}
-                    <div className="mt-16">
+                    <div className="mt-16 hidden">
                         <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
                         <RelatedProducts products={relatedProducts} />
                     </div>
@@ -496,7 +496,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Related Products */}
-                    <div className="mt-16">
+                    <div className="mt-16 hidden">
                         <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
                         <RelatedProducts products={relatedProducts} />
                     </div>
