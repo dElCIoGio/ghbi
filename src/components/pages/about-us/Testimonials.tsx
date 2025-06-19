@@ -70,13 +70,6 @@ export function Testimonials() {
                             key={activeTestimonial}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="relative mb-6 w-24 h-24 overflow-hidden rounded-full border-4 border-primary/10">
-                                <img
-                                    src={testimonials[activeTestimonial].image}
-                                    alt={testimonials[activeTestimonial].name}
-                                    className="object-cover"
-                                />
-                            </div>
                             <blockquote className="mb-4 text-xl italic">"{testimonials[activeTestimonial].content}"</blockquote>
                             <cite className="not-italic">
                                 <span className="font-bold block">{testimonials[activeTestimonial].name}</span>

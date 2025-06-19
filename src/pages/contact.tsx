@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
-import { MapPin, Phone, Clock, Send, Instagram, Facebook, Twitter, ChevronDown, ExternalLink } from "lucide-react"
+import { TiktokLogo, InstagramLogo } from "@phosphor-icons/react"
+import { MapPin, Phone, Clock, Send, ChevronDown, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,7 +13,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { contactFormSchema, type ContactFormValues } from "@/lib/validations/contact"
-import { WomanInTheWild } from "@/assets";
+import Banner from "@/assets/F3F0D4AE-6646-4513-9D47-BDB84B846C86.jpeg";
+import {Separator} from "@/components/ui/separator";
+import axios from "axios";
 
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -29,12 +32,11 @@ export default function ContactPage() {
 
     const onSubmit = async (data: ContactFormValues) => {
         setIsSubmitting(true)
-        
-        console.log(data)
+
 
         try {
             // Simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 1500))
+            await axios.post(`https://hook.eu2.make.com/gqy5ylhfeq6yfloa6cokfe65tpbormcv`, {...data})
 
             toast.success("Message sent successfully!", {
                 description: "We'll get back to you as soon as possible.",
@@ -122,7 +124,7 @@ export default function ContactPage() {
                 <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 z-0">
                         <img
-                            src={WomanInTheWild}
+                            src={Banner}
                             alt="Elegant hair styling"
                             style={{objectFit: "cover", width: "100%", height: "100%"}}
                             loading="eager"
@@ -187,14 +189,14 @@ export default function ContactPage() {
                         </motion.div>
 
                         <motion.div
-                            className="grid gap-8 md:grid-cols-3"
+                            className="grid gap-8 md:grid-cols-2"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
                             <motion.div
-                                className="flex flex-col items-center text-center p-8 rounded-xl border border-muted/30 bg-white"
+                                className="flex hidden flex-col items-center text-center p-8 rounded-xl border border-muted/30 bg-white"
                                 variants={fadeIn}
                                 whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)" }}
                                 transition={{ duration: 0.3 }}
@@ -265,11 +267,12 @@ export default function ContactPage() {
                         </motion.div>
                     </div>
                 </section>
-
+                <Separator className=""/>
                 {/* Map and Contact Form */}
                 <section id="contact-form" className="w-full py-16 md:py-24 bg-muted/10">
+
                     <div className="px-4 md:px-6">
-                        <div className="grid gap-12 lg:grid-cols-2">
+                        <div className="">
                             {/* Contact Form */}
                             <motion.div
                                 className="order-2 lg:order-1"
@@ -278,7 +281,7 @@ export default function ContactPage() {
                                 viewport={{ once: true }}
                                 variants={fadeIn}
                             >
-                                <div className="bg-white p-8 rounded-xl shadow-sm border border-muted/30">
+                                <div className="bg-white p-8 ">
                                     <div className="mb-8">
                                         <h2 className="text-3xl font-bold tracking-tight">Send Us a Message</h2>
                                         <div className="w-16 h-1 bg-primary mt-4 mb-4"></div>
@@ -380,7 +383,7 @@ export default function ContactPage() {
 
                             {/* Map */}
                             <motion.div
-                                className="order-1 lg:order-2"
+                                className="order-1 hidden lg:order-2"
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true }}
@@ -471,37 +474,26 @@ export default function ContactPage() {
                             </div>
                             <div className="flex space-x-6 mt-8">
                                 <motion.a
-                                    href="https://instagram.com"
+                                    href="https://instagram.com/glossyhairbyisis"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="rounded-full bg-white p-4 shadow-sm hover:shadow-md transition-all border border-muted/20"
                                     whileHover={{ scale: 1.1, y: -5 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <Instagram className="h-7 w-7 text-primary" />
+                                    <InstagramLogo className="h-7 w-7 text-primary" />
                                     <span className="sr-only">Instagram</span>
                                 </motion.a>
                                 <motion.a
-                                    href="https://facebook.com"
+                                    href="https://tiktok.com/@glossyhairbyisis"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="rounded-full bg-white p-4 shadow-sm hover:shadow-md transition-all border border-muted/20"
                                     whileHover={{ scale: 1.1, y: -5 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <Facebook className="h-7 w-7 text-primary" />
+                                    <TiktokLogo className="h-7 w-7 text-primary" />
                                     <span className="sr-only">Facebook</span>
-                                </motion.a>
-                                <motion.a
-                                    href="https://twitter.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="rounded-full bg-white p-4 shadow-sm hover:shadow-md transition-all border border-muted/20"
-                                    whileHover={{ scale: 1.1, y: -5 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <Twitter className="h-7 w-7 text-primary" />
-                                    <span className="sr-only">Twitter</span>
                                 </motion.a>
                             </div>
                             <div className="mt-6 bg-white p-6 rounded-xl shadow-sm border border-muted/30 max-w-md">

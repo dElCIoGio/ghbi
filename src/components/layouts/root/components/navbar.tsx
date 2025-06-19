@@ -100,7 +100,7 @@ function Navbar() {
                             <Button asChild variant="link" size="sm" key={link.href}>
                                 <Link
                                     to={link.href}
-                                    className="text-sm font-inter lowercase font-medium text-white hover:text-zinc-300"
+                                    className="text-sm font-inter font-medium text-white hover:text-zinc-300"
                                 >
                                     {link.name}
                                 </Link>
@@ -114,7 +114,7 @@ function Navbar() {
                         asChild
                         size="icon"
                         variant="ghost"
-                        className="text-zinc-300 hover:bg-zinc-800 hover:text-zinc-300"
+                        className="text-zinc-300 hidden hover:bg-zinc-800 hover:text-zinc-300"
                     >
                         <Link to="/auth/login">
                             <UserCircle className="w-6 h-6" />

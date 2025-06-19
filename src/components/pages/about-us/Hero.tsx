@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
-import { BlackWomanBeigeBackground } from "@/assets"
+import banner from "@/assets/IMG_9479.jpg"
+
 
 export function Hero() {
     const fadeIn = {
@@ -16,9 +17,9 @@ export function Hero() {
     return (
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
             <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/60"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-background/50"></div>
                 <img
-                    src={BlackWomanBeigeBackground}
+                    src={banner}
                     alt="Elegant hair styling background"
                     className="object-cover"
                 />
@@ -32,7 +33,7 @@ export function Hero() {
                 <div className="flex flex-col items-center justify-center space-y-4 text-center">
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">Our Story</h1>
-                        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-2xl/relaxed">
+                        <p className="hidden max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-2xl/relaxed">
                             Empowering women through quality hair products since 2018
                         </p>
                     </div>

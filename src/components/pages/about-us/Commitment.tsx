@@ -1,5 +1,10 @@
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import img1 from "@/assets/Facetune_18-05-2025-11-57-01.jpg"
+import img2 from "@/assets/IMG_9479.jpg"
+import img3 from "@/assets/6E06703D-A535-44BA-BEE6-BBC6E2660E95.jpeg"
+import img4 from "@/assets/61BB0B2D-3875-4A61-BE4F-19591162AA37.jpg"
+
+
 
 export function Commitment() {
     const fadeIn = {
@@ -46,16 +51,11 @@ export function Commitment() {
                             When you choose GHBI, you're not just getting a product – you're joining a movement of women who
                             believe in lifting each other up and celebrating each other's unique beauty.
                         </p>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Button className="mt-4" variant="outline">
-                                Learn About Our Impact
-                            </Button>
-                        </motion.div>
                     </motion.div>
                     <motion.div className="grid grid-cols-2 gap-4" variants={staggerContainer}>
                         <motion.div variants={fadeIn} whileHover={{ y: -5 }}>
                             <img
-                                src="/placeholder.svg?height=300&width=300"
+                                src={img1}
                                 alt="GHBI Product Showcase"
                                 width={300}
                                 height={300}
@@ -64,7 +64,7 @@ export function Commitment() {
                         </motion.div>
                         <motion.div variants={fadeIn} whileHover={{ y: -5 }}>
                             <img
-                                src="/placeholder.svg?height=300&width=300"
+                                src={img2}
                                 alt="GHBI Customer"
                                 width={300}
                                 height={300}
@@ -73,7 +73,7 @@ export function Commitment() {
                         </motion.div>
                         <motion.div variants={fadeIn} whileHover={{ y: -5 }}>
                             <img
-                                src="/placeholder.svg?height=300&width=300"
+                                src={img3}
                                 alt="GHBI Workshop"
                                 width={300}
                                 height={300}
@@ -82,7 +82,7 @@ export function Commitment() {
                         </motion.div>
                         <motion.div variants={fadeIn} whileHover={{ y: -5 }}>
                             <img
-                                src="/placeholder.svg?height=300&width=300"
+                                src={img4}
                                 alt="GHBI Team"
                                 width={300}
                                 height={300}

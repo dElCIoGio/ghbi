@@ -2,15 +2,46 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import logo from "@/assets/ghbi-logo.jpg";
+import axios from "axios";
+import {toast} from "sonner";
+import {useState} from "react";
 
 function Footer() {
+
+  const [email, setEmail] = useState<string>("")
+  const [, setIsSubmitting] = useState<boolean>(false)
+
+
+  const onSubmit = async () => {
+    setIsSubmitting(true)
+
+
+    try {
+      // Simulate API call
+      await axios.post(`https://hook.eu2.make.com/xue6nsqjhu3vglj24m1kc61vimxxdk32`, {email})
+
+      toast.success("Email submitted successfully!")
+
+      setEmail("")
+    } catch {
+      toast.error("Failed to send message", {
+        description: "Please try again later or contact us directly.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+
   return (
       <footer className="w-full bg-black text-white font-inter">
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-12">
           {/* Top nav links */}
           <nav className="flex flex-wrap gap-8 text-sm font-semibold tracking-widest uppercase justify-center md:justify-start">
-            <a href="#contact" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Instagram</a>
-            <a href="#careers" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Tik tok</a>
+            <a target="_blank"
+               rel="noopener noreferrer" href="https://www.instagram.com/glossyhairbyisis" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Instagram</a>
+            <a target="_blank"
+               rel="noopener noreferrer" href="https://www.tiktok.com/@glossyhairbyisis" className="hover:underline hover:px-2 ease-in-out transition-all duration-150">Tik tok</a>
           </nav>
 
           {/* Main content */}
@@ -22,11 +53,13 @@ function Footer() {
               <form className="flex items-center max-w-md border-b border-zinc-700 focus-within:border-white transition-colors">
                 <Input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="your email"
                     className="bg-transparent border-none text-white placeholder:text-zinc-400 focus:ring-0 focus:outline-none px-0 py-3 text-lg flex-1"
                     aria-label="Your email"
                 />
-                <Button type="submit" size="icon" className="bg-transparent hover:bg-zinc-900 text-white">
+                <Button onClick={() => onSubmit()} type="button" size="icon" className="bg-transparent hover:bg-zinc-900 text-white">
                   <ArrowRight className="w-6 h-6" />
                 </Button>
               </form>
