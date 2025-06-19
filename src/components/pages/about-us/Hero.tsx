@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
-import banner from "@/assets/IMG_9479.jpg"
+import banner from "@/assets/Facetune_18-05-2025-11-53-00.jpg"
 
 
 export function Hero() {

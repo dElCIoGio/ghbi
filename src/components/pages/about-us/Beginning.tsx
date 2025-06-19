@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { WomenGroup } from "@/assets"
+import Image from "@/assets/89B8DFC3-E44A-4587-A7D6-2028A7D574B4.jpeg"
 
 export function Beginning() {
     const fadeIn = {
@@ -36,7 +36,7 @@ export function Beginning() {
                         <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-full -z-10"></div>
                         <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/5 rounded-full -z-10"></div>
                         <img
-                            src={WomenGroup}
+                            src={Image}
                             alt="Founder of Glossy Hair By Isis"
                             width={600}
                             height={600}
