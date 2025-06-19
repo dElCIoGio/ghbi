@@ -6,17 +6,18 @@ import {Link} from "react-router"; // adjust this path as needed
 
 const HeroSection = () => {
     return (
-        <section className="flex font-dm-sans h-screen w-full overflow-hidden">
+        <section
+            className="flex flex-col md:flex-row font-dm-sans min-h-[600px] md:min-h-screen w-full overflow-hidden">
             {/* Left: Text Section */}
-            <div className="w-1/2 flex flex-col justify-center px-16 bg-zinc-100">
-                <h1 className="text-6xl font-semibold leading-tight text-black">
+            <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 py-12 bg-zinc-100">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-black">
                     Beauty <br /> wakes up skin <br /> at night
                 </h1>
-                <p className="text-gray-500 mt-6 max-w-md">
+                <p className="text-gray-500 mt-4 md:mt-6 max-w-md">
                     Celebrate love with our exquisite jewellery, symbolizing the timeless bond between two souls
                 </p>
 
-                <div className="mt-8 flex items-center gap-6">
+                <div className="mt-6 md:mt-8 flex items-center gap-4 md:gap-6">
                     <Button className="font-medium hover:opacity-90">
                         Shop Now
                     </Button>
@@ -27,8 +28,8 @@ const HeroSection = () => {
                     </Button>
                 </div>
 
-                <button className="">
-                    <div className="mt-16 flex items-center gap-2 text-sm text-gray-400">
+                <button>
+                    <div className="mt-12 md:mt-16 flex items-center gap-2 text-sm text-gray-400">
                         <span className="animate-[bounce_2.5s_infinite]">↓</span>
                         <span>Scroll down</span>
                     </div>
@@ -37,7 +38,7 @@ const HeroSection = () => {
             </div>
 
             {/* Right: Image Section */}
-            <div className="w-1/2 h-full overflow-hidden relative bg-[#f1c6cc]">
+            <div className="w-full md:w-1/2 h-64 md:h-full overflow-hidden relative bg-[#f1c6cc]">
                 <img
                     src={HeroImage}
                     alt="Hero"
