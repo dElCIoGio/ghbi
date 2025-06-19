@@ -110,8 +110,6 @@ export async function getProductByHandle(handle: string) {
 
     const { data, errors } = response.data;
 
-    console.log(data)
-
     if (errors) throw new Error("Shopify API Error");
 
     return mapShopifyProductToProduct(data.productByHandle);
@@ -126,8 +124,6 @@ export async function getProducts() {
     const { data, errors } = response.data;
 
     if (errors) throw new Error("Shopify API Error");
-
-    console.log("PRODUCTS:", data)
 
     const productsList: {node: ShopifyProduct}[] = data.products.edges
 

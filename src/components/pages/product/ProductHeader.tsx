@@ -47,12 +47,6 @@ export function ProductHeader() {
                         <ChevronRight className="h-4 w-4" />
                     </BreadcrumbSeparator>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/shop/wigs">Wigs</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator>
-                        <ChevronRight className="h-4 w-4" />
-                    </BreadcrumbSeparator>
-                    <BreadcrumbItem>
                         <BreadcrumbLink>{product.name}</BreadcrumbLink>
                     </BreadcrumbItem>
                 </BreadcrumbList>
@@ -72,7 +66,7 @@ export function ProductHeader() {
                 <div className="flex items-center gap-2 mt-2">
                     {renderRating(product.rating)}
                     <span className="text-sm text-muted-foreground">
-                        ({product.rating}) · {product.reviewCount} reviews
+                        ({product.rating})
                     </span>
                 </div>
             </div>

@@ -19,17 +19,17 @@ export function ProductInfo() {
                 {product.discount ? (
                     <>
                         <span className="text-2xl font-bold">
-                            ${formatPrice(calculateDiscountedPrice(product.price, product.discount))}
+                            £{formatPrice(calculateDiscountedPrice(product.price, product.discount))}
                         </span>
                         <span className="text-lg text-muted-foreground line-through">
-                            ${formatPrice(product.price)}
+                            £{formatPrice(product.price)}
                         </span>
                         <Badge variant="outline" className="ml-2 bg-primary/10 text-primary border-primary/20">
                             {product.discount}% OFF
                         </Badge>
                     </>
                 ) : (
-                    <span className="text-2xl font-bold">${formatPrice(product.price)}</span>
+                    <span className="text-2xl font-bold">£{formatPrice(product.price)}</span>
                 )}
             </div>
 

@@ -109,51 +109,51 @@ export default function CheckoutPage() {
     })
 
     // Sample data for shipping methods
-    const sampleShippingMethods: ShippingMethod[] = [
-        {
-            id: "standard",
-            name: "Standard Shipping",
-            description: "Delivery in 5-7 business days",
-            price: 9.99,
-            estimatedDelivery: "5-7 business days",
-        },
-        {
-            id: "express",
-            name: "Express Shipping",
-            description: "Delivery in 2-3 business days",
-            price: 19.99,
-            estimatedDelivery: "2-3 business days",
-        },
-        {
-            id: "overnight",
-            name: "Overnight Shipping",
-            description: "Next business day delivery",
-            price: 29.99,
-            estimatedDelivery: "Next business day",
-        },
-    ]
+    // const sampleShippingMethods: ShippingMethod[] = [
+    //     {
+    //         id: "standard",
+    //         name: "Standard Shipping",
+    //         description: "Delivery in 5-7 business days",
+    //         price: 9.99,
+    //         estimatedDelivery: "5-7 business days",
+    //     },
+    //     {
+    //         id: "express",
+    //         name: "Express Shipping",
+    //         description: "Delivery in 2-3 business days",
+    //         price: 19.99,
+    //         estimatedDelivery: "2-3 business days",
+    //     },
+    //     {
+    //         id: "overnight",
+    //         name: "Overnight Shipping",
+    //         description: "Next business day delivery",
+    //         price: 29.99,
+    //         estimatedDelivery: "Next business day",
+    //     },
+    // ]
 
     // Sample data for payment methods
-    const samplePaymentMethods: PaymentMethod[] = [
-        {
-            id: "credit-card",
-            name: "Credit Card",
-            description: "Pay with Visa, Mastercard, American Express, or Discover",
-            icon: "credit-card",
-        },
-        {
-            id: "paypal",
-            name: "PayPal",
-            description: "Fast, secure payment with PayPal",
-            icon: "paypal",
-        },
-        {
-            id: "apple-pay",
-            name: "Apple Pay",
-            description: "Quick and secure payment with Apple Pay",
-            icon: "apple-pay",
-        },
-    ]
+    // const samplePaymentMethods: PaymentMethod[] = [
+    //     {
+    //         id: "credit-card",
+    //         name: "Credit Card",
+    //         description: "Pay with Visa, Mastercard, American Express, or Discover",
+    //         icon: "credit-card",
+    //     },
+    //     {
+    //         id: "paypal",
+    //         name: "PayPal",
+    //         description: "Fast, secure payment with PayPal",
+    //         icon: "paypal",
+    //     },
+    //     {
+    //         id: "apple-pay",
+    //         name: "Apple Pay",
+    //         description: "Quick and secure payment with Apple Pay",
+    //         icon: "apple-pay",
+    //     },
+    // ]
 
     // Update cart summary when shipping method changes
     useEffect(() => {

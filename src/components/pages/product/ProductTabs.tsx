@@ -9,11 +9,11 @@ export function ProductTabs() {
     return (
         <div className="mt-12">
             <Tabs defaultValue="features" className="w-full">
-                <TabsList className="grid w-full grid-cols-4">
+                <TabsList className="w-full">
                     <TabsTrigger value="features">Features</TabsTrigger>
                     <TabsTrigger value="specifications">Specifications</TabsTrigger>
                     <TabsTrigger value="care">Care Instructions</TabsTrigger>
-                    <TabsTrigger value="reviews">Reviews ({product.reviewCount})</TabsTrigger>
+                    <TabsTrigger className="hidden" value="reviews">Reviews ({product.reviewCount})</TabsTrigger>
                 </TabsList>
                 <TabsContent value="features" className="pt-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -28,7 +28,7 @@ export function ProductTabs() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="relative aspect-video rounded-lg overflow-hidden">
+                        <div className="relative hidden aspect-video rounded-lg overflow-hidden">
                             <img
                                 src="/placeholder.svg?height=400&width=600&text=Product%20Features"
                                 alt="Product features"
@@ -63,7 +63,7 @@ export function ProductTabs() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="relative aspect-video rounded-lg overflow-hidden">
+                        <div className="relative hidden aspect-video rounded-lg overflow-hidden">
                             <img
                                 src="/placeholder.svg?height=400&width=600&text=Care%20Instructions"
                                 alt="Care instructions"

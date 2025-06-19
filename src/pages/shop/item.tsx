@@ -10,6 +10,7 @@ import { ProductOptions } from "@/components/pages/product/ProductOptions"
 import { ProductActions } from "@/components/pages/product/ProductActions"
 import { ProductShipping } from "@/components/pages/product/ProductShipping"
 import { ProductTabs } from "@/components/pages/product/ProductTabs"
+import RelatedProducts from "@/components/pages/shop-item/related-products";
 
 interface SelectedOptions {
     color: string | null
@@ -88,8 +89,7 @@ export default function ProductPage() {
 
                         {/* Related Products */}
                         <div className="mt-16 w-full">
-                            <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
-                            {/*<RelatedProducts products={product.relatedProducts} />*/}
+                            <RelatedProducts products={product.relatedProducts} />
                         </div>
                     </div>
                 </div>
