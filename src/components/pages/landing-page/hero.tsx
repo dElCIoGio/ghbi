@@ -6,45 +6,59 @@ import {Link} from "react-router"; // adjust this path as needed
 
 const HeroSection = () => {
     return (
-        <section
-            className="relative font-dm-sans min-h-[600px] md:min-h-screen w-full overflow-hidden">
-            {/* Background Image */}
-            <img
-                src={HeroImage}
-                alt="Hero"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                style={{ objectPosition: 'center top' }}
-            />
+        <section className="relative flex h-screen w-full font-dm-sans overflow-hidden flex-col md:flex-row">
 
-            {/* Overlay */}
-            <div className="relative flex items-center h-full">
-                <div
-                    className="w-full md:w-[70%] bg-zinc-100/80 flex flex-col justify-center px-8 md:px-16 py-12 backdrop-blur-sm">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-black">
-                        Beauty <br /> wakes up skin <br /> at night
-                    </h1>
-                    <p className="text-gray-500 mt-4 md:mt-6 max-w-md">
-                        Celebrate love with our exquisite jewellery, symbolizing the timeless bond between two souls
-                    </p>
+            {/* ✅ Background image for small and medium screens (behind text) */}
+            <div className="absolute inset-0 block lg:hidden z-0">
+                <img
+                    src={HeroImage}
+                    alt="Hero"
+                    className="w-full h-full object-cover object-top"
+                />
+            </div>
 
-                    <div className="mt-6 md:mt-8 flex items-center gap-4 md:gap-6">
-                        <Button className="font-medium hover:opacity-90">
-                            Shop Now
-                        </Button>
-                        <Button asChild variant="link" className="font-medium">
-                            <Link to="shop">
-                                All Products
-                            </Link>
-                        </Button>
-                    </div>
+            {/* ✅ Left: Text Section */}
+            <div
+                className={`
+                    relative z-10 
+                    w-full md:w-[70%] lg:w-1/2 
+                    h-full 
+                    flex flex-col justify-center px-6 md:px-10 lg:px-16
+                    bg-white/60 backdrop-blur-sm
+                    lg:bg-zinc-100 lg:backdrop-blur-0
+                `}
+            >
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-black">
+                    Beauty <br /> wakes up skin <br /> at night
+                </h1>
+                <p className="text-gray-500 mt-6 max-w-md">
+                    Celebrate love with our exquisite jewellery, symbolizing the timeless bond between two souls
+                </p>
 
-                    <button>
-                        <div className="mt-12 md:mt-16 flex items-center gap-2 text-sm text-gray-400">
-                            <span className="animate-[bounce_2.5s_infinite]">↓</span>
-                            <span>Scroll down</span>
-                        </div>
-                    </button>
+                <div className="mt-8 flex items-center gap-6">
+                    <Button className="font-medium hover:opacity-90">
+                        Shop Now
+                    </Button>
+                    <Button asChild variant="link" className="font-medium">
+                        <Link to="shop">All Products</Link>
+                    </Button>
                 </div>
+
+                <button>
+                    <div className="mt-16 flex items-center gap-2 text-sm text-gray-400">
+                        <span className="animate-bounce">↓</span>
+                        <span>Scroll down</span>
+                    </div>
+                </button>
+            </div>
+
+            {/* ✅ Right: Image Section only for large screens */}
+            <div className="hidden lg:block w-1/2 h-full overflow-hidden relative bg-[#f1c6cc]">
+                <img
+                    src={HeroImage}
+                    alt="Hero"
+                    className="w-full h-full object-cover object-top"
+                />
             </div>
         </section>
     );

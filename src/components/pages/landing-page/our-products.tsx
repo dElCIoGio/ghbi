@@ -16,7 +16,6 @@ const RecommendedProducts = ({products}: Props) => {
         related
     } = useRelatedProducts(product)
 
-
     if (related.length === 0) {
         return <div></div>;
     }

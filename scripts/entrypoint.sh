@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat <<EOF > /usr/share/nginx/html/env.js
+window.ENV = {
+  VITE_ENV: "${VITE_ENV}",
+  VITE_SHOPIFY_DOMAIN: "${VITE_SHOPIFY_DOMAIN}",
+  VITE_SHOPIFY_STOREFRONT_TOKEN: "${VITE_SHOPIFY_STOREFRONT_TOKEN}",
+  VITE_SHOPIFY_API_VERSION: "${VITE_SHOPIFY_API_VERSION}",
+};
+EOF
+
+exec "$@"
