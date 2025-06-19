@@ -6,6 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router";
 import { useProductsListingContext } from "@/context/listing-context";
 
+
+
 const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -59,6 +61,7 @@ export function ProductGrid() {
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
 
     if (isLoading) {
         return (
@@ -165,9 +168,11 @@ export function ProductGrid() {
                                 <span className="capitalize">{formatLabel(product.texture)}</span>
                             </div>
                             <div className="pt-2">
-                                <Button size="sm" className="w-full">
-                                    <ShoppingBag className="mr-2 h-4 w-4" />
-                                    Add to Cart
+                                <Button asChild size="sm" className="w-full">
+                                    <Link to={product.slug}>
+                                        <ShoppingBag className="mr-2 h-4 w-4" />
+                                        Add to Cart
+                                    </Link>
                                 </Button>
                             </div>
                         </div>

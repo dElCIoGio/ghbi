@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button";
 import type {Product} from "@/types/product";
-import {useRelatedProducts} from "@/lib/shopify/related-products";
+import {Link} from "react-router";
 
 
 interface Props {
@@ -10,19 +10,8 @@ interface Props {
 
 const RecommendedProducts = ({products}: Props) => {
 
-    const product = products[0];
-
-    const {
-        related
-    } = useRelatedProducts(product)
-
-    if (related.length === 0) {
-        return <div></div>;
-    }
-
     return (
         <section className="w-full bg-white py-20 px-6">
-            <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
 
             {/* Heading */}
             <div className="text-center mb-16">
@@ -49,8 +38,11 @@ const RecommendedProducts = ({products}: Props) => {
                         {/* Button */}
                         <Button
                             variant="secondary"
+                            asChild
                             className="w-full mt-4 py-3 text-black font-medium">
-                            View More
+                            <Link to={`shop/${product.slug}`}>
+                                View More
+                            </Link>
                         </Button>
                     </div>
                 ))}

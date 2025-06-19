@@ -20,8 +20,6 @@ function LandingPage() {
             <RecommendedProducts products={data}/>
             <StartHereSection/>
             <ExploreProductsSection/>
-
-
         </div>
     );
 }

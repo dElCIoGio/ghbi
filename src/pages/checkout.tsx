@@ -488,7 +488,7 @@ export default function CheckoutPage() {
                                             <p className="font-medium">${formatPrice(item.price * item.quantity)}</p>
                                             {item.originalPrice && (
                                                 <p className="text-sm text-muted-foreground line-through">
-                                                    ${formatPrice(item.originalPrice * item.quantity)}
+                                                    £{formatPrice(item.originalPrice * item.quantity)}
                                                 </p>
                                             )}
                                         </div>
@@ -499,26 +499,26 @@ export default function CheckoutPage() {
                             <div className="pt-4 space-y-2">
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Subtotal</span>
-                                    <span>${formatPrice(cartSummary.subtotal)}</span>
+                                    <span>£{formatPrice(cartSummary.subtotal)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Shipping</span>
-                                    <span>${formatPrice(cartSummary.shipping)}</span>
+                                    <span>£{formatPrice(cartSummary.shipping)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Tax</span>
-                                    <span>${formatPrice(cartSummary.tax)}</span>
+                                    <span>£{formatPrice(cartSummary.tax)}</span>
                                 </div>
                                 {cartSummary.discount > 0 && (
                                     <div className="flex justify-between text-green-600">
                                         <span>Discount</span>
-                                        <span>-${formatPrice(cartSummary.discount)}</span>
+                                        <span>-£{formatPrice(cartSummary.discount)}</span>
                                     </div>
                                 )}
                                 <Separator className="my-2" />
                                 <div className="flex justify-between font-bold text-lg">
                                     <span>Total</span>
-                                    <span>${formatPrice(cartSummary.total)}</span>
+                                    <span>£{formatPrice(cartSummary.total)}</span>
                                 </div>
                             </div>
                         </div>

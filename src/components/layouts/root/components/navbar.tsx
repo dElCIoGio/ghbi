@@ -3,8 +3,10 @@ import {Button} from "@/components/ui/button";
 import {Link, useLocation} from "react-router";
 import {useEffect, useState} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {useIsMobile} from "@/hooks/use-mobile";
+import {Drawer, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
+import logo from "@/assets/ghbi-logo.jpg"
+
 
 const navlinks: {
     name: string,
@@ -29,85 +31,107 @@ const navlinks: {
 ]
 
 function Navbar() {
-
     const isMobile = useIsMobile();
-
-    const [isSheet, setIsSheet] = useState<boolean>(false)
-
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const location = useLocation();
 
     useEffect(() => {
-        setIsSheet(false)
+        setIsDrawerOpen(false);
     }, [location]);
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white/60 backdrop-blur-md">
+        <nav className="sticky top-0 z-50 w-full bg-black text-white backdrop-blur-md">
             <div className="flex w-full items-center justify-between py-2 px-4">
                 {/* Mobile Navigation */}
                 <div className="md:hidden">
-                    <Sheet open={isSheet} onOpenChange={setIsSheet}>
-                        <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className="text-zinc-500 hover:text-black">
-                                <List className="w-6 h-6"/>
+                    <Drawer direction="top" open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+                        <DrawerTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-zinc-300 hover:bg-zinc-800 hover:text-zinc-300"
+                            >
+                                <List className="w-6 h-6" />
                             </Button>
-                        </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] px-2 pt-4 sm:w-[400px]">
-                            <div className="flex flex-col space-y-4 mt-8">
-                                {navlinks.map(link => (
-                                    <Button asChild variant="ghost" key={link.href} className="justify-start">
-                                        <Link to={link.href} className="text-base font-jost font-medium">
-                                            {link.name}
-                                        </Link>
+                        </DrawerTrigger>
+                        <DrawerContent className="pt-8 pb-6 px-6">
+                            <div className="flex flex-col space-y-4">
+                                {navlinks.map((link) => (
+                                    <Button
+                                        asChild
+                                        variant="ghost"
+                                        key={link.href}
+                                        className="justify-start rounded-full text-left text-base font-jost text-zinc-800"
+                                    >
+                                        <Link to={link.href}>{link.name}</Link>
                                     </Button>
                                 ))}
                             </div>
-                        </SheetContent>
-                    </Sheet>
+                        </DrawerContent>
+                    </Drawer>
                 </div>
 
-
-                <div className={`flex w-full items-center ${isMobile ? "justify-center" : "justify-between"}`}>
-                    <div className={`${isMobile ? "absolute left-1/2 transform -translate-x-1/2" : ""}`}>
+                <div
+                    className={`flex w-full items-center ${
+                        isMobile ? "justify-center" : "justify-between"
+                    }`}
+                >
+                    <div
+                        className={`${
+                            isMobile
+                                ? "absolute left-1/2 transform -translate-x-1/2"
+                                : ""
+                        }`}
+                    >
                         <Link to="/">
-                            <h1 className="text-lg font-jost font-bold">
-                                GHBI
-                            </h1>
+                            <div className="h-12 overflow-hidden flex items-center">
+                                <img
+                                    src={logo}
+                                    alt="Logo"
+                                    className="h-22 scale-125 object-contain"
+                                />
+                            </div>
                         </Link>
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-1 items-center">
-                        {
-                            navlinks.map(link => (
-                                <Button asChild variant="link" size="sm" key={link.href}>
-                                    <Link to={link.href} className="text-sm font-inter lowercase font-medium">
-                                        {link.name}
-                                    </Link>
-                                </Button>
-                            ))
-                        }
+                        {navlinks.map((link) => (
+                            <Button asChild variant="link" size="sm" key={link.href}>
+                                <Link
+                                    to={link.href}
+                                    className="text-sm font-inter lowercase font-medium text-white hover:text-zinc-300"
+                                >
+                                    {link.name}
+                                </Link>
+                            </Button>
+                        ))}
                     </div>
-
-
                 </div>
 
-
                 <div className="space-x-0.5 flex items-center">
-                    <Button asChild size="icon" variant="ghost"
-                            className="text-zinc-500 hover:text-black transition-all ease-in-out duration-200">
+                    <Button
+                        asChild
+                        size="icon"
+                        variant="ghost"
+                        className="text-zinc-300 hover:bg-zinc-800 hover:text-zinc-300"
+                    >
                         <Link to="/auth/login">
-                            <UserCircle className="w-6 h-6"/>
+                            <UserCircle className="w-6 h-6" />
                         </Link>
-
                     </Button>
-                    <Button asChild size="icon" variant="ghost"
-                            className="text-zinc-500 hover:text-black transition-all ease-in-out duration-200">
+                    <Button
+                        asChild
+                        size="icon"
+                        variant="ghost"
+                        className="text-zinc-300 hover:bg-zinc-800 hover:text-zinc-300"
+                    >
                         <Link to="/cart">
-                            <Bag/>
+                            <Bag />
                         </Link>
                     </Button>
                     <div className="mx-2">
-                        <RegionDropdown/>
+                        <RegionDropdown />
                     </div>
                 </div>
             </div>
@@ -116,21 +140,20 @@ function Navbar() {
 }
 
 function RegionDropdown() {
-
-    const [region, setRegion] = useState<string>("uk")
+    const [region, setRegion] = useState<string>("uk");
 
     return (
         <div className="hidden">
             <Select value={region} onValueChange={setRegion}>
                 <SelectTrigger className="border-none shadow-none">
-                    <SelectValue placeholder={region}/>
+                    <SelectValue placeholder={region} />
                 </SelectTrigger>
                 <SelectContent className="font-jost">
                     <SelectItem value="uk">UK</SelectItem>
                 </SelectContent>
             </Select>
         </div>
-    )
+    );
 }
 
 

@@ -29,10 +29,10 @@ const HeroSection = () => {
                 `}
             >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-black">
-                    Beauty <br /> wakes up skin <br /> at night
+                    Wake up flawless. Sleep in style. Slay all day.
                 </h1>
                 <p className="text-gray-500 mt-6 max-w-md">
-                    Celebrate love with our exquisite jewellery, symbolizing the timeless bond between two souls
+                    Feel confident, feminine and unstoppable with our 100% quality hair extensions — designed to give you luxury without limits.
                 </p>
 
                 <div className="mt-8 flex items-center gap-6">
@@ -40,14 +40,14 @@ const HeroSection = () => {
                         Shop Now
                     </Button>
                     <Button asChild variant="link" className="font-medium">
-                        <Link to="shop">All Products</Link>
+                        <Link to="shop">Browse All Styles</Link>
                     </Button>
                 </div>
 
                 <button>
                     <div className="mt-16 flex items-center gap-2 text-sm text-gray-400">
                         <span className="animate-bounce">↓</span>
-                        <span>Scroll down</span>
+                        <span>Discover what makes us different</span>
                     </div>
                 </button>
             </div>

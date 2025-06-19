@@ -49,7 +49,7 @@ export function ActiveFilters() {
             ))}
             {(priceRange[0] > 0 || priceRange[1] < 500) && (
                 <Badge variant="secondary" className="flex items-center gap-1">
-                    ${priceRange[0]} - ${priceRange[1]}
+                    £{priceRange[0]} - £{priceRange[1]}
                     <X className="h-3 w-3 cursor-pointer" onClick={() => setPriceRange([0, 500])} />
                 </Badge>
             )}

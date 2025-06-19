@@ -17,14 +17,13 @@ const ExploreProductsSection = () => {
             {/* Content */}
             <div className="relative z-10 max-w-3xl text-white">
                 <h2 className="text-4xl font-poppins md:text-5xl font-bold mb-6">
-                    Explore Our Products
+                    Explore Our Collection
                 </h2>
-                <p className="text-lg leading-relaxed mb-8">
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                <p className="leading-relaxed mb-8">
+                    Whether you’re switching it up or keeping it classic — we’ve got the textures, lengths, and vibes to match your mood. Discover extensions that last, slay, and make you feel that girl.
                 </p>
                 <Button variant="secondary" className="bg-white/30 px-6 hover:bg-white/40 text-white">
-                    Find More
+                    Find Your Look
                 </Button>
             </div>
         </section>

@@ -124,10 +124,10 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
                                         {product.discount ? (
                                             <>
                         <span className="font-bold">
-                          ${formatPrice(calculateDiscountedPrice(product.price, product.discount))}
+                          £{formatPrice(calculateDiscountedPrice(product.price, product.discount))}
                         </span>
                                                 <span className="ml-2 text-xs text-muted-foreground line-through">
-                          ${formatPrice(product.price)}
+                          £{formatPrice(product.price)}
                         </span>
                                             </>
                                         ) : (

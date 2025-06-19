@@ -85,8 +85,8 @@ export function Filters() {
                                     onValueChange={setPriceRange}
                                 />
                                 <div className="flex items-center justify-between mt-2 text-sm">
-                                    <span>${priceRange[0]}</span>
-                                    <span>${priceRange[1]}</span>
+                                    <span>£{priceRange[0]}</span>
+                                    <span>£{priceRange[1]}</span>
                                 </div>
                             </div>
                         </div>

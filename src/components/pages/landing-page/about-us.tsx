@@ -12,9 +12,8 @@ const OurStorySection = () => {
 
                 {/* Right Content */}
                 <div className="w-full md:w-2/3 space-y-6">
-                    <p className="text-gray-600 text-lg leading-relaxed">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
+                    <p className="text-gray-600 text-base leading-relaxed">
+                        Behind every bundle is a bold woman rewriting her own rules. Whether it’s a glow-up moment, a fresh start, or just a vibe switch — our hair is there with you every step (and selfie) of the way.                    </p>
                     <Button variant="secondary" className="font-semibold">
                         Read Full Story
                     </Button>

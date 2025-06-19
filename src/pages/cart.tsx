@@ -107,7 +107,7 @@ export default function CartPage() {
 
             if (newDiscountCode) {
                 if (newDiscountCode.minimumPurchase && subtotal < newDiscountCode.minimumPurchase) {
-                    setDiscountError(`This code requires a minimum purchase of $${newDiscountCode.minimumPurchase}`)
+                    setDiscountError(`This code requires a minimum purchase of £${newDiscountCode.minimumPurchase}`)
                 } else {
                     setDiscountCode(newDiscountCode)
                     setDiscountInput("")
@@ -271,10 +271,10 @@ export default function CartPage() {
                                                 </Link>
                                                 <div className="flex items-baseline gap-2">
                                                     <span
-                                                        className="font-bold">${formatPrice(item.price * item.quantity)}</span>
+                                                        className="font-bold">£{formatPrice(item.price * item.quantity)}</span>
                                                     {item.originalPrice && (
                                                         <span className="text-sm text-muted-foreground line-through">
-                              ${formatPrice(item.originalPrice * item.quantity)}
+                              £{formatPrice(item.originalPrice * item.quantity)}
                             </span>
                                                     )}
                                                 </div>
@@ -366,13 +366,13 @@ export default function CartPage() {
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Subtotal</span>
-                                        <span>${formatPrice(subtotal)}</span>
+                                        <span>£{formatPrice(subtotal)}</span>
                                     </div>
 
                                     {shipping > 0 ? (
                                         <div className="flex justify-between">
                                             <span className="text-muted-foreground">Shipping</span>
-                                            <span>${formatPrice(shipping)}</span>
+                                            <span>£{formatPrice(shipping)}</span>
                                         </div>
                                     ) : (
                                         <div className="flex justify-between">
@@ -383,13 +383,13 @@ export default function CartPage() {
 
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Tax (8%)</span>
-                                        <span>${formatPrice(tax)}</span>
+                                        <span>£{formatPrice(tax)}</span>
                                     </div>
 
                                     {discount > 0 && (
                                         <div className="flex justify-between text-green-600">
                                             <span>Discount</span>
-                                            <span>-${formatPrice(discount)}</span>
+                                            <span>-£{formatPrice(discount)}</span>
                                         </div>
                                     )}
 
