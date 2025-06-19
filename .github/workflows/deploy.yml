@@ -21,12 +21,15 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.PROJECT_ID }}
+          install_components: 'beta'
+
+      - name: Configure Docker for GCP
+        run: gcloud auth configure-docker
 
       - name: Build and push Docker image
-        continue-on-error: true
         run: |
-          gcloud builds submit --tag gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVICE_NAME }} || echo "Build finished (log streaming failed)"
-
+          docker build -t gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVICE_NAME }} .
+          docker push gcr.io/${{ secrets.PROJECT_ID }}/${{ secrets.SERVICE_NAME }}
 
       - name: Deploy to Cloud Run
         run: |
