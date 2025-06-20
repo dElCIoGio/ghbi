@@ -53,7 +53,6 @@ export default function CartPage() {
     // Calculate cart summary
     const subtotal = getCartTotal()
     const shipping = subtotal > 150 ? 0 : 15
-    const tax = subtotal * 0.08 // 8% tax rate
     let discount = 0
 
     if (discountCode) {
@@ -64,7 +63,7 @@ export default function CartPage() {
         }
     }
 
-    const total = subtotal + shipping + tax - discount
+    const total = subtotal + shipping - discount
 
     const checkoutUrl = useMemo(() => buildCheckoutUrl(cart), [cart])
 
@@ -381,9 +380,9 @@ export default function CartPage() {
                                         </div>
                                     )}
 
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between hidden">
                                         <span className="text-muted-foreground">Tax (8%)</span>
-                                        <span>£{formatPrice(tax)}</span>
+                                        <span>£0.00</span>
                                     </div>
 
                                     {discount > 0 && (
