@@ -229,8 +229,8 @@ export default function ContactPage() {
                                 <div className="rounded-full bg-primary/10 p-5 mb-5">
                                     <Phone className="h-7 w-7 text-primary" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-3">Phone & Email</h3>
-                                <p className="text-muted-foreground mb-2">
+                                <h3 className="text-xl font-bold mb-3">Contact</h3>
+                                <p className="hidden text-muted-foreground mb-2">
                                     <a href="tel:+18005551234" className="hover:text-primary transition-colors">
                                         (800) 555-1234
                                     </a>
