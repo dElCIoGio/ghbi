@@ -20,7 +20,6 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import type { RelatedProduct } from "@/types/product"
 import {Link} from "react-router"
 import RelatedProducts from "@/components/pages/shop-item/related-products"
