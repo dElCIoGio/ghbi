@@ -1,6 +1,6 @@
 import { Check } from "lucide-react"
 import { useProductContext } from "@/context/product-context"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useMatchingVariant } from "@/lib/helpers/findMatchingVariant"
 
 interface ProductOptionsProps {
@@ -19,6 +19,14 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedLength, setSelectedLength] = useState<string | null>(null)
     const [selectedTexture, ] = useState<string | null>(null)
+
+    // Automatically select the only available color
+    useEffect(() => {
+        if (product.colors.length === 1 && !selectedColor) {
+            const colorValue = product.colors[0].value
+            handleColorChange(colorValue)
+        }
+    }, [product.colors, selectedColor])
 
     const selectedOptions = useMemo(() => {
         const options = []
@@ -65,41 +73,43 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
     return (
         <div className="space-y-4">
             {/* Color Selection */}
-            <div>
-                <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">Color</span>
-                    {selectedColor && (
-                        <span className="text-sm text-muted-foreground">
-                            {selectedColor}
-                        </span>
-                    )}
+            {product.colors.length > 1 && (
+                <div>
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium">Color</span>
+                        {selectedColor && (
+                            <span className="text-sm text-muted-foreground">
+                                {selectedColor}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                        {product.colors.map((color) => (
+                            <button
+                                key={color.id}
+                                className={`relative w-10 h-10 rounded-full border-2 transition-all ${
+                                    !color.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:scale-110"
+                                } ${selectedColor === color.value ? "border-primary ring-2 ring-primary/20" : "border-muted"}`}
+                                style={{ backgroundColor: color.value }}
+                                onClick={() => color.inStock && handleColorChange(color.value)}
+                                disabled={!color.inStock}
+                                aria-label={color.name}
+                            >
+                                {selectedColor === color.value && (
+                                    <span className="absolute inset-0 flex items-center justify-center">
+                                        <Check className="h-5 w-5 text-white drop-shadow-md" />
+                                    </span>
+                                )}
+                                {!color.inStock && (
+                                    <span className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-8 h-0.5 bg-muted-foreground/70 rotate-45 rounded-full" />
+                                    </span>
+                                )}
+                            </button>
+                        ))}
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                    {product.colors.map((color) => (
-                        <button
-                            key={color.id}
-                            className={`relative w-10 h-10 rounded-full border-2 transition-all ${
-                                !color.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:scale-110"
-                            } ${selectedColor === color.value ? "border-primary ring-2 ring-primary/20" : "border-muted"}`}
-                            style={{ backgroundColor: "#000000" }}
-                            onClick={() => color.inStock && handleColorChange(color.value)}
-                            disabled={!color.inStock}
-                            aria-label={color.name}
-                        >
-                            {selectedColor === color.value && (
-                                <span className="absolute inset-0 flex items-center justify-center">
-                                    <Check className="h-5 w-5 text-white drop-shadow-md" />
-                                </span>
-                            )}
-                            {!color.inStock && (
-                                <span className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-8 h-0.5 bg-muted-foreground/70 rotate-45 rounded-full" />
-                                </span>
-                            )}
-                        </button>
-                    ))}
-                </div>
-            </div>
+            )}
 
             {/* Length Selection */}
             <div>
