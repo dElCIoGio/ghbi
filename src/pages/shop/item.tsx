@@ -33,12 +33,14 @@ export default function ProductPage() {
         quantityAvailable: product?.stockQuantity ?? 0
     })
 
-    // Set default color when product loads
+    // Set defaults when product loads
     useEffect(() => {
         if (product && !selectedOptions.color) {
             setSelectedOptions((prev) => ({
                 ...prev,
                 color: product.colors[0]?.value ?? null,
+                price: product.price,
+                quantityAvailable: product.stockQuantity,
             }))
         }
     }, [product, selectedOptions.color])
@@ -90,7 +92,7 @@ export default function ProductPage() {
 
                             {/* Product Details */}
                             <div className="space-y-6">
-                                <ProductInfo />
+                                <ProductInfo price={selectedOptions.price} />
                                 <ProductOptions onOptionChange={setSelectedOptions} />
                                 <ProductActions selectedOptions={selectedOptions} />
                                 <ProductShipping />
