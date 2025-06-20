@@ -32,7 +32,10 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
     const currentPrice = useMemo(() => {
         if (!matchingVariant) return product.price
         return Number(matchingVariant.price.amount)
-    }, [product.price, matchingVariant])
+    }, [product.price, matchingVariant, selectedOptions, matchingVariant?.price.amount])
+
+    console.log(matchingVariant)
+    console.log(currentPrice)
 
     // Set default color and texture when product loads
     useEffect(() => {
@@ -59,15 +62,11 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                 color,
                 length: selectedLength,
                 texture,
-                price:currentPrice,
+                price: currentPrice,
                 quantityAvailable,
             })
         }
-    }, [product, selectedColor, selectedTexture, selectedLength])
-
-
-
-
+    }, [product, selectedColor, selectedTexture, selectedLength, matchingVariant, currentPrice])
 
     const quantityAvailable = useMemo(() => {
         if (!matchingVariant) return 0
@@ -99,6 +98,7 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
     return (
         <div className="space-y-4">
             {/* Color Selection */}
+
             {product.colors.length > 1 && (
                 <div>
                     <div className="flex items-center justify-between mb-2">
