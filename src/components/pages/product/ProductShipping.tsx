@@ -13,7 +13,7 @@ export function ProductShipping() {
                     <p className="text-xs text-muted-foreground">On orders over £400</p>
                 </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="hidden flex items-start gap-3">
                 <RotateCcw className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
                     <h4 className="font-medium text-sm">30-Day Returns</h4>
