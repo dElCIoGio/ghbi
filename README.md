@@ -1,54 +1,46 @@
-# React + TypeScript + Vite
+# GHBI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GHBI is a React and TypeScript storefront for the Glossy Hair By Isis shop. The project uses Vite for development and bundles the app for deployment with Nginx. Product data is fetched from the Shopify Storefront API.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 20+
+- npm
 
-## Expanding the ESLint configuration
+## Local setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Copy the example environment file and provide your values:
+   ```bash
+   cp .env.example .env
+   ```
+   - `VITE_ENV` – the current environment (e.g. `development` or `production`).
+   - `VITE_SHOPIFY_DOMAIN` – your Shopify domain without a protocol.
+   - `VITE_SHOPIFY_STOREFRONT_TOKEN` – Storefront API access token.
+   - `VITE_SHOPIFY_API_VERSION` – version of the Shopify API to use.
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Build
+
+Create an optimized production build:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Docker deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Build the Docker image and start the container:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+docker build -t ghbi .
+docker run --env-file .env -p 8080:8080 ghbi
 ```
+
+The application will be served on port `8080`.
