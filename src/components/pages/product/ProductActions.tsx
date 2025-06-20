@@ -35,7 +35,7 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
     }
 
     const handleAddToCart = () => {
-        if (!selectedOptions.color || !selectedOptions.length) {
+        if (!selectedOptions.length) {
             toast.error("Please select all options before adding to cart")
             return
         }
@@ -43,11 +43,9 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
         // Find the matching variant
         const matchingVariant = product.variants.find(variant => {
             if (!variant.selectedOptions) return false
-            return variant.selectedOptions.every(option => {
-                if (option.name === 'Color') return option.value === selectedOptions.color
-                if (option.name === 'Length') return option.value === selectedOptions.length
-                return false
-            })
+            return variant.selectedOptions.some(option =>
+                option.name === 'Length' && option.value === selectedOptions.length
+            )
         })
 
         if (!matchingVariant) {
@@ -126,7 +124,7 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
                     size="lg"
                     className="flex-1 gap-2 py-3"
                     onClick={handleAddToCart}
-                    disabled={!selectedOptions.color || !selectedOptions.length || selectedOptions.quantityAvailable === 100}
+                    disabled={!selectedOptions.length || selectedOptions.quantityAvailable === 100}
                 >
                     <AnimatePresence mode="wait">
                         {isAddedToCart ? (
