@@ -230,26 +230,10 @@ export default function CartPage() {
                                                         size="icon"
                                                         className="h-8 w-8 rounded-l-none"
                                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                                        disabled={item.quantity >= item.maxQuantity}
                                                     >
                                                         <Plus className="h-3 w-3"/>
                                                     </Button>
-                                                    {item.quantity >= item.maxQuantity && (
-                                                        <TooltipProvider>
-                                                            <Tooltip>
-                                                                <TooltipTrigger asChild>
-                                                                    <div
-                                                                        className="ml-2 text-xs text-amber-500 flex items-center">
-                                                                        <AlertCircle className="h-3 w-3 mr-1"/>
-                                                                        Max quantity
-                                                                    </div>
-                                                                </TooltipTrigger>
-                                                                <TooltipContent>
-                                                                    <p>Maximum available quantity for this item</p>
-                                                                </TooltipContent>
-                                                            </Tooltip>
-                                                        </TooltipProvider>
-                                                    )}
+
                                                 </div>
                                                 <div className="flex gap-2">
                                                     <Button
