@@ -49,7 +49,6 @@ export default function CheckoutPage() {
     const [cartSummary, setCartSummary] = useState<CartSummary>({
         subtotal: getCartTotal(),
         shipping: 0,
-        tax: 0,
         discount: 0,
         total: getCartTotal(),
     })
@@ -163,7 +162,7 @@ export default function CheckoutPage() {
                 setCartSummary((prev) => ({
                     ...prev,
                     shipping: selectedMethod.price,
-                    total: prev.subtotal + selectedMethod.price + prev.tax - prev.discount,
+                    total: prev.subtotal + selectedMethod.price - prev.discount,
                 }))
             }
         }
@@ -277,7 +276,7 @@ export default function CheckoutPage() {
                 setCartSummary((prev) => ({
                     ...prev,
                     discount: discountAmount,
-                    total: prev.subtotal + prev.shipping + prev.tax - discountAmount,
+                    total: prev.subtotal + prev.shipping - discountAmount,
                 }))
 
                 toast.success("Discount applied successfully")
@@ -298,7 +297,7 @@ export default function CheckoutPage() {
         setCartSummary((prev) => ({
             ...prev,
             discount: 0,
-            total: prev.subtotal + prev.shipping + prev.tax,
+            total: prev.subtotal + prev.shipping,
         }))
 
         toast.success("Discount removed")
@@ -485,7 +484,7 @@ export default function CheckoutPage() {
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <p className="font-medium">${formatPrice(item.price * item.quantity)}</p>
+                                            <p className="font-medium">£{formatPrice(item.price * item.quantity)}</p>
                                             {item.originalPrice && (
                                                 <p className="text-sm text-muted-foreground line-through">
                                                     £{formatPrice(item.originalPrice * item.quantity)}
@@ -504,10 +503,6 @@ export default function CheckoutPage() {
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Shipping</span>
                                     <span>£{formatPrice(cartSummary.shipping)}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="text-muted-foreground">Tax</span>
-                                    <span>£{formatPrice(cartSummary.tax)}</span>
                                 </div>
                                 {cartSummary.discount > 0 && (
                                     <div className="flex justify-between text-green-600">
@@ -950,7 +945,7 @@ export default function CheckoutPage() {
                                                                 <label htmlFor={`shipping-method-${method.id}`} className="font-medium cursor-pointer">
                                                                     {method.name}
                                                                 </label>
-                                                                <span className="font-medium">${formatPrice(method.price)}</span>
+                                                                <span className="font-medium">£{formatPrice(method.price)}</span>
                                                             </div>
                                                             <p className="text-sm text-muted-foreground mt-1">{method.description}</p>
                                                             <p className="text-xs text-muted-foreground mt-1">
@@ -1249,7 +1244,7 @@ export default function CheckoutPage() {
                                                                         return (
                                                                             <>
                                                                                 <p>
-                                                                                    {method.name} - ${formatPrice(method.price)}
+    {method.name} - £{formatPrice(method.price)}
                                                                                 </p>
                                                                                 <p className="text-sm text-muted-foreground">
                                                                                     Estimated delivery: {method.estimatedDelivery}
@@ -1402,10 +1397,10 @@ export default function CheckoutPage() {
                                                             </div>
                                                         </div>
                                                         <div className="text-right">
-                                                            <p className="font-medium">${formatPrice(item.price * item.quantity)}</p>
+                                                            <p className="font-medium">£{formatPrice(item.price * item.quantity)}</p>
                                                             {item.originalPrice && (
                                                                 <p className="text-sm text-muted-foreground line-through">
-                                                                    ${formatPrice(item.originalPrice * item.quantity)}
+                                                                    £{formatPrice(item.originalPrice * item.quantity)}
                                                                 </p>
                                                             )}
                                                         </div>
@@ -1471,7 +1466,7 @@ export default function CheckoutPage() {
                                                             <p className="font-medium">{item.name}</p>
                                                             <p className="text-muted-foreground">Qty: {item.quantity}</p>
                                                         </div>
-                                                        <p className="font-medium">${formatPrice(item.price * item.quantity)}</p>
+                                                        <p className="font-medium">£{formatPrice(item.price * item.quantity)}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -1482,27 +1477,23 @@ export default function CheckoutPage() {
                                 <div className="space-y-2">
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Subtotal</span>
-                                        <span>${formatPrice(cartSummary.subtotal)}</span>
+                                        <span>£{formatPrice(cartSummary.subtotal)}</span>
                                     </div>
 
                                     <div className="flex justify-between">
                                         <span className="text-muted-foreground">Shipping</span>
                                         {cartSummary.shipping > 0 ? (
-                                            <span>${formatPrice(cartSummary.shipping)}</span>
+                                            <span>£{formatPrice(cartSummary.shipping)}</span>
                                         ) : (
                                             <span className="text-muted-foreground">Calculated at next step</span>
                                         )}
                                     </div>
 
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Tax (8%)</span>
-                                        <span>${formatPrice(cartSummary.tax)}</span>
-                                    </div>
 
                                     {cartSummary.discount > 0 && (
                                         <div className="flex justify-between text-green-600">
                                             <span>Discount</span>
-                                            <span>-${formatPrice(cartSummary.discount)}</span>
+                                            <span>-£{formatPrice(cartSummary.discount)}</span>
                                         </div>
                                     )}
                                 </div>
@@ -1511,7 +1502,7 @@ export default function CheckoutPage() {
 
                                 <div className="flex justify-between font-bold text-lg">
                                     <span>Total</span>
-                                    <span>${formatPrice(cartSummary.total)}</span>
+                                    <span>£{formatPrice(cartSummary.total)}</span>
                                 </div>
 
                                 {/* Discount Code */}
@@ -1529,7 +1520,7 @@ export default function CheckoutPage() {
                                                             <div>
                                                                 <div className="font-medium">Discount Applied</div>
                                                                 <div className="text-xs text-muted-foreground">
-                                                                    ${formatPrice(cartSummary.discount)} off your order
+                                                                    £{formatPrice(cartSummary.discount)} off your order
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -397,7 +397,7 @@ export default function CartPage() {
 
                                     <div className="flex justify-between font-bold text-lg">
                                         <span>Total</span>
-                                        <span>${formatPrice(total)}</span>
+                                        <span>£{formatPrice(total)}</span>
                                     </div>
                                 </div>
 
@@ -415,7 +415,7 @@ export default function CartPage() {
                                                         {discountCode.type === "percentage"
                                                             ? `${discountCode.value}% off`
                                                             : discountCode.type === "fixed"
-                                                                ? `$${discountCode.value} off`
+                                                                ? `£${discountCode.value} off`
                                                                 : "Free shipping"}
                                                     </div>
                                                 </div>
@@ -487,7 +487,7 @@ export default function CartPage() {
                                         <AlertCircle className="h-4 w-4 text-primary" />
                                         <AlertTitle>Free shipping available</AlertTitle>
                                         <AlertDescription>
-                                            Add ${formatPrice(150 - subtotal)} more to qualify for free shipping.
+                                            Add £{formatPrice(150 - subtotal)} more to qualify for free shipping.
                                         </AlertDescription>
                                     </Alert>
                                 )}
