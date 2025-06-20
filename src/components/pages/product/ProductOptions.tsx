@@ -18,23 +18,44 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
 
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedLength, setSelectedLength] = useState<string | null>(null)
-    const [selectedTexture, ] = useState<string | null>(null)
+    const [selectedTexture, setSelectedTexture] = useState<string | null>(null)
 
-    // Automatically select the only available color
+    // Set default color and texture when product loads
     useEffect(() => {
-        if (product.colors.length === 1 && !selectedColor) {
-            const colorValue = product.colors[0].value
-            handleColorChange(colorValue)
+        const defaultColor = product.colors[0]?.value
+        const defaultTexture = product.textures[0]?.value
+
+        let updated = false
+        let color = selectedColor
+        if (!selectedColor && defaultColor) {
+            color = defaultColor
+            setSelectedColor(color)
+            updated = true
         }
-    }, [product.colors, selectedColor])
+
+        let texture = selectedTexture
+        if (!selectedTexture && defaultTexture) {
+            texture = defaultTexture
+            setSelectedTexture(texture)
+            updated = true
+        }
+
+        if (updated) {
+            onOptionChange({
+                color,
+                length: selectedLength,
+                texture,
+                price: currentPrice,
+                quantityAvailable,
+            })
+        }
+    }, [product, selectedColor, selectedTexture, selectedLength, currentPrice, quantityAvailable])
 
     const selectedOptions = useMemo(() => {
         const options = []
-        if (selectedColor) options.push({ name: 'Color', value: selectedColor })
         if (selectedLength) options.push({ name: 'Length', value: selectedLength })
-        if (selectedTexture) options.push({ name: 'Texture', value: selectedTexture })
         return options
-    }, [selectedColor, selectedLength, selectedTexture])
+    }, [selectedLength])
 
     const matchingVariant = useMatchingVariant(product.variants, selectedOptions)
 
