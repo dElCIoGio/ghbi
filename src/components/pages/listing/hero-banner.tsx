@@ -23,7 +23,7 @@ export function HeroBanner() {
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Collection</h1>
                         <p className="max-w-[700px] text-muted-foreground md:text-lg/relaxed">
-                            Discover premium wigs and hair extensions designed to enhance your natural beauty
+                            Discover premium hair extensions designed to enhance your natural beauty
                         </p>
                     </div>
                 </div>

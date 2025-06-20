@@ -77,12 +77,7 @@ export default function ContactPage() {
         {
             question: "What types of hair products do you offer?",
             answer:
-                "We offer a wide range of premium hair products including wigs, extensions, frontals, closures, and bundles. Our products are made from high-quality human hair and come in various textures, lengths, and colors to suit your preferences.",
-        },
-        {
-            question: "How do I determine the right size for my wig?",
-            answer:
-                'To find the right wig size, measure your head circumference from the front of your hairline, around your ear, to the nape of your neck, and back to the starting point. Our wigs come in small (21-21.5"), medium (22-22.5"), and large (23-23.5") sizes. Most of our wigs also feature adjustable straps for a customized fit.',
+                "We offer a wide range of premium hair products including extensions, frontals, and bundles. Our products are made from high-quality human hair and come in various textures, lengths, and colors to suit your preferences.",
         },
         {
             question: "What is your return policy?",
