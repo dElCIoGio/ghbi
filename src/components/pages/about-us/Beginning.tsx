@@ -52,7 +52,7 @@ export function Beginning() {
                             beautiful.
                         </p>
                         <p className="text-muted-foreground md:text-lg/relaxed">
-                            In 2018, GHBI launched with a small collection of premium wigs and extensions. Today, we've grown into
+                            In 2024, GHBI launched with a small collection of premium hair extensions. Today, we've grown into
                             a beloved brand that serves thousands of women worldwide, helping them express their unique beauty
                             through versatile, high-quality hair products.
                         </p>
@@ -62,7 +62,7 @@ export function Beginning() {
                                 <AccordionContent>
                                     <p className="text-muted-foreground">
                                         From a small home-based business to an international brand, our journey has been incredible. We
-                                        started with just 3 product styles and now offer over 50 different options to suit every woman's
+                                        started with just an incredible idea and now offer offer over 4 different options to suit every woman's
                                         unique style and needs.
                                     </p>
                                 </AccordionContent>

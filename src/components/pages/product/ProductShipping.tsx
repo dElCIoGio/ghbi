@@ -10,7 +10,7 @@ export function ProductShipping() {
                 <Truck className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
                     <h4 className="font-medium text-sm">Free Shipping</h4>
-                    <p className="text-xs text-muted-foreground">On orders over $150</p>
+                    <p className="text-xs text-muted-foreground">On orders over £400</p>
                 </div>
             </div>
             <div className="flex items-start gap-3">
@@ -27,7 +27,7 @@ export function ProductShipping() {
                     <p className="text-xs text-muted-foreground">Safe & protected</p>
                 </div>
             </div>
-            <div className="pt-2">
+            <div className="pt-2 hidden">
                 <p className="text-xs text-muted-foreground">SKU: {product.sku}</p>
             </div>
         </div>

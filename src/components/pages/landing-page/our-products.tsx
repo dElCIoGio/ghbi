@@ -30,7 +30,7 @@ const RecommendedProducts = ({products}: Props) => {
 
                         {/* Info */}
                         <div className="mt-4 space-y-1">
-                            <p className="text-sm text-gray-400">{product.category}</p>
+                            <p className="text-sm text-gray-400">Bundles</p>
                             <p className="font-medium text-black">{product.name}</p>
                             <p className="font-bold text-black">£{product.price}</p>
                         </div>

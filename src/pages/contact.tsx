@@ -236,8 +236,8 @@ export default function ContactPage() {
                                     </a>
                                 </p>
                                 <p className="text-muted-foreground mb-4">
-                                    <a href="mailto:contact@ghbi.com" className="hover:text-primary transition-colors">
-                                        contact@ghbi.com
+                                    <a href="mailto:glossyhairbyisis@gmail.com" className="hover:text-primary transition-colors">
+                                        glossyhairbyisi@gmail.com
                                     </a>
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-2">Customer service available during business hours</p>

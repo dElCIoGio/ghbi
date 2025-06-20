@@ -34,8 +34,8 @@ export function Mission() {
                     <div className="space-y-2">
                         <h2 className="text-3xl font-bold tracking-tighter">Our Mission</h2>
                         <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
-                            At GHBI, we believe that every woman deserves to feel confident and beautiful in her own skin. Our
-                            mission is to empower women through high-quality hair products that enhance their natural beauty and
+                            At GlossyHairByIsis, we believe that every woman deserves to feel confident and beautiful in her own skin. Our
+                            mission is to empower women through high-quality hair extensions that enhance their natural beauty and
                             allow them to express themselves authentically.
                         </p>
                     </div>

@@ -74,7 +74,7 @@ function Footer() {
                 <div>379 West Broadway</div>
                 <div>New York, 10012</div>
                 <div>(646)-982-1574</div>
-                <div className="truncate">newbusiness@ghbi.com</div>
+                <div className="truncate">glossyhairbyisis@gmail.com</div>
               </div>
 
             </div>

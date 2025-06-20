@@ -323,7 +323,7 @@ export default function SignUpPage() {
                                     <Check className="h-5 w-5 mr-2 text-primary" />
                                     <span>Personalized style recommendations</span>
                                 </li>
-                                <li className="flex items-center">
+                                <li className="flex items-center hidden">
                                     <Check className="h-5 w-5 mr-2 text-primary" />
                                     <span>Free shipping on your first order</span>
                                 </li>

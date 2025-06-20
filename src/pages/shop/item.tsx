@@ -23,12 +23,13 @@ export default function ProductPage() {
     const { productId } = useParams() as unknown as { productId: string }
     const { data: product, isLoading } = useGetProductByHandle(productId)
 
+    console.log(product)
+
     const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
         color: null,
         length: null,
         price: product?.price ?? 0,
         quantityAvailable: product?.stockQuantity ?? 0
-
     })
 
     if (isLoading || !product) {

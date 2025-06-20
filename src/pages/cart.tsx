@@ -284,7 +284,7 @@ export default function CartPage() {
                                                     <span>Color: {item.selectedColor.name}</span>
                                                     <span>Length: {item.selectedLength.value}</span>
                                                 </div>
-                                                <div className="mt-1">
+                                                <div className="mt-1 hidden">
                                                     <span>SKU: {item.sku}</span>
                                                 </div>
                                             </div>
