@@ -3,28 +3,27 @@ import { useState, useEffect } from "react"
 
 const testimonials = [
     {
-        name: "Sarah Johnson",
-        role: "Customer since 2019",
+        name: "Nya Crisana",
+        role: "Customer since 2025",
         content:
-            "GlossyHairByIsis has completely transformed my confidence. The quality of their hair extensions is unmatched, and I love how natural they look and feel.",
+            "This hair is amazing. No tangles, no fuss — just like real human hair. I’ve barely touched it in two weeks and it still looks flawless.",
         image: "/placeholder.svg?height=100&width=100",
     },
     {
-        name: "Michelle Rodriguez",
-        role: "Customer since 2020",
+        name: "Bruna Furtado",
+        role: "Customer since 2024",
         content:
-            "As someone who struggled with hair loss, finding GlossyHairByIsis was life-changing. Their wigs are so comfortable and look so natural that no one can tell!",
+            "Incredible quality and lightning-fast delivery. The customer service was just as good. I’m definitely ordering again!",
         image: "/placeholder.svg?height=100&width=100",
     },
     {
-        name: "Aisha Williams",
-        role: "Customer since 2021",
+        name: "Alicia Vinhas",
+        role: "Customer since 2025",
         content:
-            "The inclusivity of GlossyHairByIsis's product range is what keeps me coming back. They truly understand diverse hair needs and textures.",
+            "This wavy hair is perfect — soft, natural, and barely sheds. It blends beautifully and holds both waves and curls. I got so many compliments!",
         image: "/placeholder.svg?height=100&width=100",
     },
 ]
-
 export function Testimonials() {
     const [activeTestimonial, setActiveTestimonial] = useState(0)
 
