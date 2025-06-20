@@ -10,13 +10,13 @@ const teamMembers = [
     {
         name: "Maya Chen",
         role: "Creative Director",
-        bio: "Brings artistic vision to GHBI's brand identity and product design.",
+        bio: "Brings artistic vision to GlossyHairByIsis's brand identity and product design.",
         image: "/placeholder.svg?height=300&width=300",
     },
     {
         name: "Zoe Martinez",
         role: "Head of Product Development",
-        bio: "Ensures every GHBI product meets our high standards of quality and innovation.",
+        bio: "Ensures every GlossyHairByIsis product meets our high standards of quality and innovation.",
         image: "/placeholder.svg?height=300&width=300",
     },
 ]
@@ -53,7 +53,7 @@ export function Team() {
                 >
                     <h2 className="text-3xl font-bold tracking-tighter mb-4">Meet Our Team</h2>
                     <p className="max-w-[700px] mx-auto text-muted-foreground">
-                        The passionate individuals behind GHBI who are dedicated to helping you look and feel your best.
+                        The passionate individuals behind GlossyHairByIsis who are dedicated to helping you look and feel your best.
                     </p>
                 </motion.div>
 

@@ -81,7 +81,7 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                             className={`relative w-10 h-10 rounded-full border-2 transition-all ${
                                 !color.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:scale-110"
                             } ${selectedColor === color.value ? "border-primary ring-2 ring-primary/20" : "border-muted"}`}
-                            style={{ backgroundColor: color.value }}
+                            style={{ backgroundColor: "#000000" }}
                             onClick={() => color.inStock && handleColorChange(color.value)}
                             disabled={!color.inStock}
                             aria-label={color.name}

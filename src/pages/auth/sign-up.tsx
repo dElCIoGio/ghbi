@@ -119,7 +119,7 @@ export default function SignUpPage() {
                                 <span className="text-2xl font-bold tracking-tight">GHBI</span>
                             </Link>
                             <h1 className="mt-6 text-3xl font-semibold tracking-tight">Create an account</h1>
-                            <p className="mt-2 text-sm text-muted-foreground">Join GHBI to access exclusive products and offers</p>
+                            <p className="mt-2 text-sm text-muted-foreground">Join GlossyHairByIsis to access exclusive products and offers</p>
                         </div>
 
                         <Form {...form}>
@@ -308,7 +308,7 @@ export default function SignUpPage() {
                         <div className="max-w-md text-white">
                             <h2 className="text-3xl font-bold mb-4">Elevate Your Style</h2>
                             <p className="text-lg mb-6">
-                                Join the GHBI community and discover premium hair products designed to enhance your natural beauty.
+                                Join the GlossyHairByIsis community and discover premium hair products designed to enhance your natural beauty.
                             </p>
                             <ul className="space-y-3">
                                 <li className="flex items-center">

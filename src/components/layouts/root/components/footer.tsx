@@ -83,7 +83,7 @@ function Footer() {
           {/* Bottom row */}
           <div
               className="flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-400 gap-2 border-t border-zinc-800 pt-6">
-            <div>©2025 GHBI, All rights reserved</div>
+            <div>©2025 GlossyHairByIsis, All rights reserved</div>
             <div className="flex gap-4 mt-2 sm:mt-0">
               {/* Socials if needed */}
             </div>

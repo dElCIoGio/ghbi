@@ -39,7 +39,7 @@ export function Commitment() {
                     <motion.div className="space-y-6" variants={fadeIn}>
                         <h2 className="text-3xl font-bold tracking-tighter">Our Commitment</h2>
                         <p className="text-muted-foreground md:text-lg/relaxed">
-                            At GHBI, we're committed to more than just selling hair products. We're dedicated to creating a
+                            At GlossyHairByIsis, we're committed to more than just selling hair products. We're dedicated to creating a
                             community where women can feel supported, inspired, and empowered.
                         </p>
                         <p className="text-muted-foreground md:text-lg/relaxed">
@@ -48,7 +48,7 @@ export function Commitment() {
                             entrepreneurship.
                         </p>
                         <p className="text-muted-foreground md:text-lg/relaxed">
-                            When you choose GHBI, you're not just getting a product – you're joining a movement of women who
+                            When you choose GlossyHairByIsis, you're not just getting a product – you're joining a movement of women who
                             believe in lifting each other up and celebrating each other's unique beauty.
                         </p>
                     </motion.div>

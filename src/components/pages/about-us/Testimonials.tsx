@@ -6,21 +6,21 @@ const testimonials = [
         name: "Sarah Johnson",
         role: "Customer since 2019",
         content:
-            "GHBI has completely transformed my confidence. The quality of their hair extensions is unmatched, and I love how natural they look and feel.",
+            "GlossyHairByIsis has completely transformed my confidence. The quality of their hair extensions is unmatched, and I love how natural they look and feel.",
         image: "/placeholder.svg?height=100&width=100",
     },
     {
         name: "Michelle Rodriguez",
         role: "Customer since 2020",
         content:
-            "As someone who struggled with hair loss, finding GHBI was life-changing. Their wigs are so comfortable and look so natural that no one can tell!",
+            "As someone who struggled with hair loss, finding GlossyHairByIsis was life-changing. Their wigs are so comfortable and look so natural that no one can tell!",
         image: "/placeholder.svg?height=100&width=100",
     },
     {
         name: "Aisha Williams",
         role: "Customer since 2021",
         content:
-            "The inclusivity of GHBI's product range is what keeps me coming back. They truly understand diverse hair needs and textures.",
+            "The inclusivity of GlossyHairByIsis's product range is what keeps me coming back. They truly understand diverse hair needs and textures.",
         image: "/placeholder.svg?height=100&width=100",
     },
 ]

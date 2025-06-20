@@ -52,7 +52,7 @@ export function Beginning() {
                             beautiful.
                         </p>
                         <p className="text-muted-foreground md:text-lg/relaxed">
-                            In 2024, GHBI launched with a small collection of premium hair extensions. Today, we've grown into
+                            In 2024, GlossyHairByIsis launched with a small collection of premium hair extensions. Today, we've grown into
                             a beloved brand that serves thousands of women worldwide, helping them express their unique beauty
                             through versatile, high-quality hair products.
                         </p>
