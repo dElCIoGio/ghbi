@@ -7,15 +7,11 @@ import {
     Minus,
     ChevronRight,
     AlertCircle,
-    CheckCircle2,
     ArrowRight,
-    RefreshCw,
     ShoppingCart,
     Heart,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -25,7 +21,6 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import type { DiscountCode } from "@/types/cart"
 import type { RelatedProduct } from "@/types/product"
 import {Link} from "react-router"
 import RelatedProducts from "@/components/pages/shop-item/related-products"
@@ -33,11 +28,7 @@ import {useCart} from "@/hooks/use-cart"
 import { buildCheckoutUrl } from "@/lib/shopify/checkout"
 
 export default function CartPage() {
-    const [discountInput, setDiscountInput] = useState("")
-    const [isApplyingDiscount, setIsApplyingDiscount] = useState(false)
-    const [discountError, setDiscountError] = useState<string | null>(null)
     const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([])
-    const [discountCode, setDiscountCode] = useState<DiscountCode | null>(null)
     const { cart, isLoading, removeFromCart, updateQuantity, getCartTotal } = useCart()
 
     // Sample related products
@@ -52,77 +43,9 @@ export default function CartPage() {
 
     // Calculate cart summary
     const subtotal = getCartTotal()
-    const shipping = subtotal > 150 ? 0 : 15
-    let discount = 0
-
-    if (discountCode) {
-        if (discountCode.type === "percentage") {
-            discount = subtotal * (discountCode.value / 100)
-        } else if (discountCode.type === "fixed") {
-            discount = discountCode.value
-        }
-    }
-
-    const total = subtotal + shipping - discount
 
     const checkoutUrl = useMemo(() => buildCheckoutUrl(cart), [cart])
 
-    // Handle apply discount code
-    const handleApplyDiscount = () => {
-        if (!discountInput.trim()) {
-            setDiscountError("Please enter a discount code")
-            return
-        }
-
-        setIsApplyingDiscount(true)
-        setDiscountError(null)
-
-        // Simulate API call to validate discount code
-        setTimeout(() => {
-            // Sample discount codes for demonstration
-            const validDiscountCodes: Record<string, DiscountCode> = {
-                WELCOME10: {
-                    code: "WELCOME10",
-                    type: "percentage",
-                    value: 10,
-                    isValid: true,
-                },
-                FREESHIP: {
-                    code: "FREESHIP",
-                    type: "free_shipping",
-                    value: 0,
-                    isValid: true,
-                },
-                SAVE20: {
-                    code: "SAVE20",
-                    type: "percentage",
-                    value: 20,
-                    minimumPurchase: 300,
-                    isValid: true,
-                },
-            }
-
-            const newDiscountCode = validDiscountCodes[discountInput.toUpperCase()]
-
-            if (newDiscountCode) {
-                if (newDiscountCode.minimumPurchase && subtotal < newDiscountCode.minimumPurchase) {
-                    setDiscountError(`This code requires a minimum purchase of £${newDiscountCode.minimumPurchase}`)
-                } else {
-                    setDiscountCode(newDiscountCode)
-                    setDiscountInput("")
-                }
-            } else {
-                setDiscountError("Invalid discount code")
-            }
-
-            setIsApplyingDiscount(false)
-        }, 800)
-    }
-
-    // Handle remove discount code
-    const handleRemoveDiscount = () => {
-        setDiscountCode(null)
-    }
 
     // Format price
     const formatPrice = (price: number) => {
@@ -368,88 +291,9 @@ export default function CartPage() {
                                         <span>£{formatPrice(subtotal)}</span>
                                     </div>
 
-                                    {shipping > 0 ? (
-                                        <div className="flex justify-between">
-                                            <span className="text-muted-foreground">Shipping</span>
-                                            <span>£{formatPrice(shipping)}</span>
-                                        </div>
-                                    ) : (
-                                        <div className="flex justify-between">
-                                            <span className="text-muted-foreground">Shipping</span>
-                                            <span className="text-green-600">Free</span>
-                                        </div>
-                                    )}
 
-                                    <div className="flex justify-between hidden">
-                                        <span className="text-muted-foreground">Tax (8%)</span>
-                                        <span>£0.00</span>
-                                    </div>
-
-                                    {discount > 0 && (
-                                        <div className="flex justify-between text-green-600">
-                                            <span>Discount</span>
-                                            <span>-£{formatPrice(discount)}</span>
-                                        </div>
-                                    )}
-
-                                    <Separator />
-
-                                    <div className="flex justify-between font-bold text-lg">
-                                        <span>Total</span>
-                                        <span>£{formatPrice(total)}</span>
-                                    </div>
                                 </div>
 
-                                {/* Discount Code */}
-                                <div className="space-y-3">
-                                    <h3 className="font-medium">Discount Code</h3>
-
-                                    {discountCode ? (
-                                        <div className="flex items-center justify-between bg-primary/5 border border-primary/20 rounded-md p-3">
-                                            <div className="flex items-center">
-                                                <CheckCircle2 className="h-4 w-4 text-green-600 mr-2" />
-                                                <div>
-                                                    <div className="font-medium">{discountCode.code}</div>
-                                                    <div className="text-xs text-muted-foreground">
-                                                        {discountCode.type === "percentage"
-                                                            ? `${discountCode.value}% off`
-                                                            : discountCode.type === "fixed"
-                                                                ? `£${discountCode.value} off`
-                                                                : "Free shipping"}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <Button variant="ghost" size="sm" onClick={handleRemoveDiscount} className="h-8 text-xs">
-                                                Remove
-                                            </Button>
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="flex gap-2">
-                                                <Input
-                                                    placeholder="Enter discount code"
-                                                    value={discountInput}
-                                                    onChange={(e) => setDiscountInput(e.target.value)}
-                                                    className="h-10"
-                                                />
-                                                <Button
-                                                    onClick={handleApplyDiscount}
-                                                    disabled={isApplyingDiscount || !discountInput.trim()}
-                                                    className="shrink-0 h-10"
-                                                >
-                                                    {isApplyingDiscount ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : null}
-                                                    Apply
-                                                </Button>
-                                            </div>
-                                            {discountError && (
-                                                <div className="text-sm text-red-500 flex items-center">
-                                                    <AlertCircle className="h-3 w-3 mr-1" />
-                                                    {discountError}
-                                                </div>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
 
                                 {/* Checkout Button */}
                                 <Button asChild size="lg" className="w-full">
