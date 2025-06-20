@@ -330,7 +330,7 @@ export default function CartPage() {
                                         <AlertCircle className="h-4 w-4 text-primary" />
                                         <AlertTitle>Free shipping available</AlertTitle>
                                         <AlertDescription>
-                                            Add £{formatPrice(150 - subtotal)} more to qualify for free shipping.
+                                            Add £{formatPrice(400 - subtotal)} more to qualify for free shipping.
                                         </AlertDescription>
                                     </Alert>
                                 )}
