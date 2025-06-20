@@ -32,12 +32,12 @@ export default function ProductPage() {
         quantityAvailable: product?.stockQuantity ?? 0
     })
 
-    // Auto select the only available color
+    // Set default color when product loads
     useEffect(() => {
-        if (product && product.colors.length === 1 && !selectedOptions.color) {
+        if (product && !selectedOptions.color) {
             setSelectedOptions((prev) => ({
                 ...prev,
-                color: product.colors[0].value,
+                color: product.colors[0]?.value ?? null,
             }))
         }
     }, [product, selectedOptions.color])
