@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useParams } from "react-router"
 import { useGetProductByHandle } from "@/hooks/shopify/products"
@@ -31,6 +31,16 @@ export default function ProductPage() {
         price: product?.price ?? 0,
         quantityAvailable: product?.stockQuantity ?? 0
     })
+
+    // Auto select the only available color
+    useEffect(() => {
+        if (product && product.colors.length === 1 && !selectedOptions.color) {
+            setSelectedOptions((prev) => ({
+                ...prev,
+                color: product.colors[0].value,
+            }))
+        }
+    }, [product, selectedOptions.color])
 
     if (isLoading || !product) {
         return (
