@@ -37,9 +37,11 @@ const HeroSection = () => {
 
                 <div className="mt-8 flex items-center gap-6">
                     <Button className="font-medium hover:opacity-90">
-                        Shop Now
+                        <Link to="shop">
+                            Shop Now
+                        </Link>
                     </Button>
-                    <Button asChild variant="link" className="font-medium">
+                    <Button asChild variant="link" className="hidden font-medium">
                         <Link to="shop">Browse All Styles</Link>
                     </Button>
                 </div>
