@@ -20,6 +20,20 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
     const [selectedLength, setSelectedLength] = useState<string | null>(null)
     const [selectedTexture, setSelectedTexture] = useState<string | null>(null)
 
+
+    const selectedOptions = useMemo(() => {
+        const options = []
+        if (selectedLength) options.push({ name: 'Length', value: selectedLength })
+        return options
+    }, [selectedLength])
+
+    const matchingVariant = useMatchingVariant(product.variants, [...selectedOptions, {name: 'Color', value: 'Natural color'}])
+
+    const currentPrice = useMemo(() => {
+        if (!matchingVariant) return product.price
+        return Number(matchingVariant.price.amount)
+    }, [product.price, matchingVariant])
+
     // Set default color and texture when product loads
     useEffect(() => {
         const defaultColor = product.colors[0]?.value
@@ -45,24 +59,15 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                 color,
                 length: selectedLength,
                 texture,
-                price: currentPrice,
+                price:currentPrice,
                 quantityAvailable,
             })
         }
-    }, [product, selectedColor, selectedTexture, selectedLength, currentPrice, quantityAvailable])
+    }, [product, selectedColor, selectedTexture, selectedLength])
 
-    const selectedOptions = useMemo(() => {
-        const options = []
-        if (selectedLength) options.push({ name: 'Length', value: selectedLength })
-        return options
-    }, [selectedLength])
 
-    const matchingVariant = useMatchingVariant(product.variants, selectedOptions)
 
-    const currentPrice = useMemo(() => {
-        if (!matchingVariant) return product.price
-        return Number(matchingVariant.price.amount)
-    }, [matchingVariant, product.price])
+
 
     const quantityAvailable = useMemo(() => {
         if (!matchingVariant) return 0

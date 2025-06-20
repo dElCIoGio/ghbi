@@ -23,18 +23,21 @@ export function useMatchingVariant(
     variants: ShopifyVariant[],
     selectedOptions: { name: string; value: string }[]
 ): ShopifyVariant | undefined {
+
     return useMemo(() => {
         const lengthOption = selectedOptions.find(
             (option) => option.name === "Length",
         );
         if (!lengthOption) return undefined;
 
-        return variants.find((variant) =>
+        const variantFound = variants.find((variant) =>
             variant.selectedOptions?.some(
                 (selected) =>
                     selected.name === "Length" &&
                     selected.value === lengthOption.value,
             ),
         );
+
+        return variantFound
     }, [variants, selectedOptions]);
 }
