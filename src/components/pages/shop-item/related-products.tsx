@@ -131,7 +131,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
                         </span>
                                             </>
                                         ) : (
-                                            <span className="font-bold">${formatPrice(product.price)}</span>
+                                            <span className="font-bold">£{formatPrice(product.price)}</span>
                                         )}
                                     </div>
                                 </div>
