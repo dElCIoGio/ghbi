@@ -164,8 +164,8 @@ export function ProductGrid() {
                             {renderRating(product.rating)}
                             <div className="flex items-center text-xs text-muted-foreground mt-1">
                                 <span className="capitalize">{formatLabel(product.category)}</span>
-                                <span className="mx-1">•</span>
-                                <span className="capitalize">{formatLabel(product.texture)}</span>
+                                <span className="mx-1 hidden">•</span>
+                                <span className="capitalize hidden">{formatLabel(product.texture)}</span>
                             </div>
                             <div className="pt-2">
                                 <Button asChild size="sm" className="w-full">

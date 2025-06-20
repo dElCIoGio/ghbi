@@ -72,7 +72,7 @@ export function mapShopifyProductToProduct(shopify: ShopifyProduct): Product {
         colors,
         lengths,
         textures,
-        category: (shopify.category?.value ?? "wigs") as Product["category"],
+        category: (shopify.category?.value ?? "Bundles") as Product["category"],
         texture: (textures.length > 0 ? textures[0].value : "straight") as Product["texture"], // fallback to metafield already handled here
         type: "standard", // You can make this dynamic later
         colour: "default", // colors[0]?.value ?? "default",

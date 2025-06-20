@@ -18,7 +18,7 @@ import { useProductsListingContext } from "@/context/listing-context";
 
 // Filter options
 const filterOptions = {
-    categories: ["wigs", "extensions", "bundles", "frontals", "closures"],
+    categories: ["extensions", "bundles", "frontals", "closures"],
     types: [
         "lace-front",
         "full-lace",

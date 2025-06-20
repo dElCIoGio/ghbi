@@ -33,7 +33,7 @@ export function Products() {
                 >
                     <h2 className="text-3xl font-bold tracking-tighter mb-4">Our Products</h2>
                     <p className="max-w-[700px] mx-auto text-muted-foreground">
-                        Discover our range of premium wigs and hair extensions, designed to enhance your natural beauty.
+                        Discover our range of premium hair extensions, designed to enhance your natural beauty.
                     </p>
                 </motion.div>
 
