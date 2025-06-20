@@ -1,7 +1,7 @@
 import { Check } from "lucide-react"
 import { useProductContext } from "@/context/product-context"
 import { useState, useMemo, useEffect } from "react"
-import { useMatchingVariant } from "@/lib/helpers/findMatchingVariant"
+import { useMatchingVariant, findMatchingVariant } from "@/lib/helpers/findMatchingVariant"
 
 interface ProductOptionsProps {
     onOptionChange: (options: {
@@ -86,12 +86,21 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
 
     const handleLengthChange = (lengthValue: string) => {
         setSelectedLength(lengthValue)
+
+        const variant = findMatchingVariant(product.variants, [
+            { name: 'Length', value: lengthValue },
+            { name: 'Color', value: 'Natural color' },
+        ])
+
+        const price = variant ? Number(variant.price.amount) : product.price
+        const quantity = variant ? variant.quantityAvailable : 0
+
         onOptionChange({
             color: selectedColor,
             length: lengthValue,
             texture: selectedTexture,
-            price: currentPrice,
-            quantityAvailable
+            price,
+            quantityAvailable: quantity,
         })
     }
 
