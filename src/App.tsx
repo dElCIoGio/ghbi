@@ -36,7 +36,7 @@ function App() {
                         <Route index element={<Listing/>}/>
                         <Route path=":productId" element={<ProductPage/>}/>
                     </Route>
-                    <Route path="cart" element={<CartPage/>}/>
+                    <Route path="c" element={<CartPage/>}/>
                     <Route path="contact" element={<ContactPage/>}/>
 
                     <Route path="auth">
