@@ -12,7 +12,6 @@ import SignUpPage from "@/pages/auth/sign-up";
 import VerifyPage from "@/pages/auth/verify";
 import ContactPage from "@/pages/contact";
 import {useEffect} from "react";
-import CheckoutPage from "@/pages/checkout";
 import Test from "@/pages/test";
 
 
@@ -39,7 +38,6 @@ function App() {
                     </Route>
                     <Route path="cart" element={<CartPage/>}/>
                     <Route path="contact" element={<ContactPage/>}/>
-                    <Route path="checkout" element={<CheckoutPage/>}/>
 
                     <Route path="auth">
                         <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
