@@ -10,8 +10,8 @@ export interface CartItem {
     originalPrice?: number
     quantity: number
     maxQuantity: number
-    selectedColor: ProductColor
-    selectedLength: ProductLength
+    selectedColor?: ProductColor
+    selectedLength?: ProductLength
     sku: string
 }
 

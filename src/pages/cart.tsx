@@ -202,8 +202,12 @@ export default function CartPage() {
                                             </div>
                                             <div className="text-sm text-muted-foreground">
                                                 <div className="flex flex-wrap gap-x-4 gap-y-1">
-                                                    <span>Color: {item.selectedColor.name}</span>
-                                                    <span>Length: {item.selectedLength.value}</span>
+                                                    {item.selectedColor && (
+                                                        <span>Color: {item.selectedColor.name}</span>
+                                                    )}
+                                                    {item.selectedLength && (
+                                                        <span>Length: {item.selectedLength.value}</span>
+                                                    )}
                                                 </div>
                                                 <div className="mt-1 hidden">
                                                     <span>SKU: {item.sku}</span>

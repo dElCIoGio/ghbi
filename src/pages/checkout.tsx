@@ -478,7 +478,13 @@ export default function CheckoutPage() {
                                             <h3 className="font-medium">{item.name}</h3>
                                             <div className="text-sm text-muted-foreground">
                                                 <p>
-                                                    {item.selectedColor.name} / {item.selectedLength.value}
+                                                    {item.selectedColor?.name && item.selectedLength ? (
+                                                        <>
+                                                            {item.selectedColor.name} / {item.selectedLength.value}
+                                                        </>
+                                                    ) : item.selectedLength ? (
+                                                        item.selectedLength.value
+                                                    ) : item.selectedColor?.name ?? ""}
                                                 </p>
                                                 <p>Quantity: {item.quantity}</p>
                                             </div>
@@ -1391,7 +1397,13 @@ export default function CheckoutPage() {
                                                             <h3 className="font-medium">{item.name}</h3>
                                                             <div className="text-sm text-muted-foreground">
                                                                 <p>
-                                                                    {item.selectedColor.name} / {item.selectedLength.value}
+                                                                    {item.selectedColor?.name && item.selectedLength ? (
+                                                                        <>
+                                                                            {item.selectedColor.name} / {item.selectedLength.value}
+                                                                        </>
+                                                                    ) : item.selectedLength ? (
+                                                                        item.selectedLength.value
+                                                                    ) : item.selectedColor?.name ?? ""}
                                                                 </p>
                                                                 <p>Quantity: {item.quantity}</p>
                                                             </div>
