@@ -1,5 +1,9 @@
 import { useGetProducts } from "@/hooks/shopify/products";
-import {type FilterState, ProductsListingContext, type ProductsListingContextProps} from "@/context/listing-context";
+import {
+    type FilterState,
+    ProductsListingContext,
+    type ProductsListingContextProps,
+} from "@/context/listing-context";
 import { HeroBanner } from "@/components/pages/listing/hero-banner";
 import { HighlightedProducts } from "@/components/pages/listing/highlighted-products";
 import { Filters } from "@/components/pages/listing/filters";
@@ -8,7 +12,15 @@ import { ActiveFilters } from "@/components/pages/listing/active-filters";
 import { ProductGrid } from "@/components/pages/listing/product-grid";
 import { Pagination } from "@/components/pages/listing/pagination";
 import type {Product} from "@/types/product";
-import {useCallback, useMemo, useState, useEffect} from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
+
+function classifyLength(value: string): string | null {
+    const num = parseFloat(value);
+    if (Number.isNaN(num)) return null;
+    if (num <= 14) return "short";
+    if (num <= 22) return "medium";
+    return "long";
+}
 
 
 
@@ -110,7 +122,13 @@ export function ProductsListingProvider({ children, products }: { children: Reac
         // Apply length filters
         if (activeFilters.lengths.length > 0) {
             result = result.filter((product) =>
-                activeFilters.lengths.includes(product.length)
+                product.lengths.some((l) => {
+                    const category = classifyLength(l.value);
+                    return (
+                        category !== null &&
+                        activeFilters.lengths.includes(category)
+                    );
+                })
             );
         }
 
