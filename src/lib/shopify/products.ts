@@ -30,6 +30,10 @@ const PRODUCTS_QUERY = `
                 currencyCode
               }
               quantityAvailable
+              selectedOptions {
+                name
+                value
+              }
             }
           }
         }
