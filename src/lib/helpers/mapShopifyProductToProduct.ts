@@ -46,6 +46,20 @@ export function mapShopifyProductToProduct(shopify: ShopifyProduct): Product {
         inStock: true
     }));
 
+    // Determine product length category based on the first variant length value
+    let productLength: string = "default";
+    const firstLengthOption = firstVariant?.selectedOptions?.find(
+        opt => opt.name.toLowerCase() === "length"
+    );
+    if (firstLengthOption) {
+        const parsed = parseFloat(firstLengthOption.value);
+        if (!Number.isNaN(parsed)) {
+            if (parsed <= 14) productLength = "short";
+            else if (parsed <= 22) productLength = "medium";
+            else productLength = "long";
+        }
+    }
+
     return {
         id: shopify.id,
         slug: shopify.handle,
@@ -76,7 +90,7 @@ export function mapShopifyProductToProduct(shopify: ShopifyProduct): Product {
         texture: (textures.length > 0 ? textures[0].value : "straight") as Product["texture"], // fallback to metafield already handled here
         type: "standard", // You can make this dynamic later
         colour: "default", // colors[0]?.value ?? "default",
-        length: "default", //lengths[0]?.value ?? "default",
+        length: productLength,
         features: parseJsonList(shopify.features?.value),
         specifications: parseKeyValueString(shopify.specifications?.value),
         careInstructions: parseJsonList(shopify.careInstructions?.value),
