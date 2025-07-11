@@ -172,7 +172,7 @@ export function Filters() {
                                 </AccordionContent>
                             </AccordionItem>
 
-                            <AccordionItem value="length">
+                            <AccordionItem value="length" className="hidden">
                                 <AccordionTrigger>Length</AccordionTrigger>
                                 <AccordionContent>
                                     <div className="space-y-2">
