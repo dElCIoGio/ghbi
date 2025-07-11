@@ -194,7 +194,7 @@ export default function CartPage() {
                                                     <span
                                                         className="font-bold">£{formatPrice(item.price * item.quantity)}</span>
                                                     {item.originalPrice && (
-                                                        <span className="text-sm text-muted-foreground line-through">
+                                                        <span className="hidden text-sm text-muted-foreground line-through">
                               £{formatPrice(item.originalPrice * item.quantity)}
                             </span>
                                                     )}
@@ -248,7 +248,7 @@ export default function CartPage() {
                                                         <Trash2 className="h-3 w-3 mr-1"/>
                                                         Remove
                                                     </Button>
-                                                    <Button variant="ghost" size="sm" className="h-8 text-xs">
+                                                    <Button variant="ghost" size="sm" className="h-8 hidden text-xs">
                                                         <Heart className="h-3 w-3 mr-1"/>
                                                         Save
                                                     </Button>

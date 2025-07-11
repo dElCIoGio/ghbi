@@ -9,7 +9,7 @@ export function useCart() {
 
     // Load cart from localStorage on mount
     useEffect(() => {
-        const savedCart = localStorage.getItem("cart")
+        const savedCart = localStorage.getItem("cart_ghbi_2025")
         if (savedCart) {
             try {
                 setCart(JSON.parse(savedCart))
@@ -24,7 +24,7 @@ export function useCart() {
     // Save cart to localStorage whenever it changes
     useEffect(() => {
         if (!isLoading) {
-            localStorage.setItem("cart", JSON.stringify(cart))
+            localStorage.setItem("cart_ghbi_2025", JSON.stringify(cart))
         }
     }, [cart, isLoading])
 

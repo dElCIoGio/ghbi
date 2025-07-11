@@ -57,11 +57,12 @@ const formatLabel = (str: string) => {
 export function ProductGrid() {
     const { filteredProducts, isLoading, currentPage, productsPerPage, clearFilters } = useProductsListingContext();
 
+
+
     // Pagination
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
 
     if (isLoading) {
         return (
