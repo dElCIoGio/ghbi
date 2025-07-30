@@ -5,6 +5,18 @@ export interface ShopifyImage {
     altText: string | null;
 }
 
+export interface ShopifyVideoSource {
+    url: string;
+    mimeType?: string;
+}
+
+export interface ShopifyMedia {
+    mediaContentType: string;
+    image?: ShopifyImage;
+    previewImage?: { url: string };
+    sources?: ShopifyVideoSource[];
+}
+
 export interface ShopifyVariant {
     id: string;
     sku: string;
@@ -35,6 +47,9 @@ export interface ShopifyProduct {
     tags: string[];
     images: {
         edges: Edge<ShopifyImage>[];
+    };
+    media?: {
+        edges: Edge<ShopifyMedia>[];
     };
     variants: {
         edges: Edge<ShopifyVariant>[];

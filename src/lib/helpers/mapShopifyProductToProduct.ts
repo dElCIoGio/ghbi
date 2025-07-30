@@ -78,11 +78,28 @@ export function mapShopifyProductToProduct(shopify: ShopifyProduct): Product {
                     ? "low_stock"
                     : "in_stock",
         sku: firstVariant?.sku ?? "",
-        images: shopify.images.edges.map((edge, i) => ({
-            id: i,
-            url: edge.node.url,
-            alt: edge.node.altText ?? "",
-        })),
+        images: (shopify.media?.edges && shopify.media.edges.length > 0
+            ? shopify.media.edges.map((edge, i) => {
+                if (edge.node.mediaContentType === "VIDEO") {
+                    return {
+                        id: i,
+                        url: edge.node.previewImage?.url ?? "",
+                        alt: "",
+                        isVideo: true,
+                    };
+                }
+                return {
+                    id: i,
+                    url: edge.node.image?.url ?? "",
+                    alt: edge.node.image?.altText ?? "",
+                };
+            })
+            : shopify.images.edges.map((edge, i) => ({
+                id: i,
+                url: edge.node.url,
+                alt: edge.node.altText ?? "",
+            }))
+        ),
         colors,
         lengths,
         textures,
