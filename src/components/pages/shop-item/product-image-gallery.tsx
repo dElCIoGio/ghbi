@@ -57,29 +57,14 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
                         className="relative h-full w-full"
                     >
                         {activeImage.isVideo ? (
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <div className="relative h-full w-full cursor-pointer bg-muted flex items-center justify-center">
-                                        <img
-                                            src={activeImage.url || "/placeholder.svg"}
-                                            alt={activeImage.alt}
-                                            className="object-cover"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="rounded-full bg-primary/90 p-4">
-                                                <Play className="h-8 w-8 text-white" fill="white" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </DialogTrigger>
-                                <DialogContent className="max-w-4xl">
-                                    <video
-                                        controls
-                                        className="w-full h-full"
-                                        src={activeImage.videoSources?.[0]?.url}
-                                    />
-                                </DialogContent>
-                            </Dialog>
+                            <div className="relative h-full w-full">
+                                <video
+                                    controls
+                                    className="w-full h-full object-contain"
+                                    src={activeImage.videoSources?.[0]?.url}
+                                    poster={activeImage.url || "/placeholder.svg"}
+                                />
+                            </div>
                         ) : (
                             <Dialog>
                                 <DialogTrigger asChild>
