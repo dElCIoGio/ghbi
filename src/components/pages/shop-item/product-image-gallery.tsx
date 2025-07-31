@@ -57,17 +57,20 @@ export default function ProductImageGallery({ images }: ProductImageGalleryProps
                         className="relative h-full w-full"
                     >
                         {activeImage.isVideo ? (
-                            <div className="relative h-full w-full bg-muted flex items-center justify-center">
-                                <img
-                                    src={activeImage.url || "/placeholder.svg"}
-                                    alt={activeImage.alt}
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="rounded-full bg-primary/90 p-4">
-                                        <Play className="h-8 w-8 text-white" fill="white" />
-                                    </div>
-                                </div>
+                            <div className="relative h-full w-full">
+                                <video
+                                    controls
+                                    className="h-full w-full object-cover"
+                                    poster={activeImage.url || "/placeholder.svg"}
+                                >
+                                    {activeImage.videoSources?.map((source) => (
+                                        <source
+                                            key={source.url}
+                                            src={source.url}
+                                            type={source.mimeType}
+                                        />
+                                    ))}
+                                </video>
                             </div>
                         ) : (
                             <Dialog>
