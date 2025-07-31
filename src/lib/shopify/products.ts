@@ -20,6 +20,28 @@ const PRODUCTS_QUERY = `
             }
           }
         }
+        media(first: 5) {
+          edges {
+            node {
+              mediaContentType
+              ... on MediaImage {
+                image {
+                  url
+                  altText
+                }
+              }
+              ... on Video {
+                sources {
+                  url
+                  mimeType
+                }
+                previewImage {
+                  url
+                }
+              }
+            }
+          }
+        }
         variants(first: 5) {
           edges {
             node {
@@ -75,6 +97,28 @@ const PRODUCT_BY_HANDLE_QUERY = `
           node {
             url
             altText
+          }
+        }
+      }
+      media(first: 5) {
+        edges {
+          node {
+            mediaContentType
+            ... on MediaImage {
+              image {
+                url
+                altText
+              }
+            }
+            ... on Video {
+              sources {
+                url
+                mimeType
+              }
+              previewImage {
+                url
+              }
+            }
           }
         }
       }
