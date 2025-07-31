@@ -6,6 +6,7 @@ export interface ProductImage {
     url: string
     alt: string
     isVideo?: boolean
+    videoUrl?: string
 }
 
 // Product color type

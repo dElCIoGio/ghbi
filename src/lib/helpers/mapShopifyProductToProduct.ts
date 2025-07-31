@@ -86,6 +86,7 @@ export function mapShopifyProductToProduct(shopify: ShopifyProduct): Product {
                         url: edge.node.previewImage?.url ?? "",
                         alt: "",
                         isVideo: true,
+                        videoUrl: edge.node.sources?.[0]?.url ?? "",
                     };
                 }
                 return {
