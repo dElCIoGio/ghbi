@@ -15,6 +15,7 @@ import RelatedProducts from "@/components/pages/shop-item/related-products";
 interface SelectedOptions {
     color: string | null
     length: string | null
+    texture: string | null
     price: number
     quantityAvailable: number
 }
@@ -29,21 +30,41 @@ export default function ProductPage() {
     const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
         color: null,
         length: null,
+        texture: null,
         price: product?.price ?? 0,
         quantityAvailable: product?.stockQuantity ?? 0
     })
 
     // Set defaults when product loads
     useEffect(() => {
-        if (product && !selectedOptions.color) {
-            setSelectedOptions((prev) => ({
+        if (!product) return
+
+        setSelectedOptions((prev) => {
+            const defaultColor = prev.color ?? product.colors[0]?.value ?? null
+            const defaultTexture = prev.texture ?? (
+                product.textures.length > 0
+                    ? (product.textures.find((texture) => texture.value === product.texture)?.value ?? product.textures[0]?.value ?? null)
+                    : product.texture ?? null
+            )
+
+            if (
+                prev.color === defaultColor &&
+                prev.texture === defaultTexture &&
+                prev.price === product.price &&
+                prev.quantityAvailable === product.stockQuantity
+            ) {
+                return prev
+            }
+
+            return {
                 ...prev,
-                color: product.colors[0]?.value ?? null,
+                color: defaultColor,
+                texture: defaultTexture,
                 price: product.price,
                 quantityAvailable: product.stockQuantity,
-            }))
-        }
-    }, [product, selectedOptions.color])
+            }
+        })
+    }, [product])
 
     if (isLoading || !product) {
         return (

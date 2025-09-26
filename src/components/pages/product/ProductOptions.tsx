@@ -1,7 +1,7 @@
 import { Check } from "lucide-react"
 import { useProductContext } from "@/context/product-context"
 import { useState, useMemo, useEffect } from "react"
-import { useMatchingVariant, findMatchingVariant } from "@/lib/helpers/findMatchingVariant"
+import { useMatchingVariant } from "@/lib/helpers/findMatchingVariant"
 
 interface ProductOptionsProps {
     onOptionChange: (options: {
@@ -22,86 +22,70 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
 
 
     const selectedOptions = useMemo(() => {
-        const options = []
-        if (selectedLength) options.push({ name: 'Length', value: selectedLength })
+        const options: { name: string; value: string }[] = []
+        if (selectedLength) options.push({ name: "Length", value: selectedLength })
+        if (selectedColor) options.push({ name: "Color", value: selectedColor })
+        if (selectedTexture) options.push({ name: "Texture", value: selectedTexture })
         return options
-    }, [selectedLength])
+    }, [selectedLength, selectedColor, selectedTexture])
 
-    const matchingVariant = useMatchingVariant(product.variants, [...selectedOptions, {name: 'Color', value: 'Natural color'}])
+    const matchingVariant = useMatchingVariant(product.variants, selectedOptions)
 
     const currentPrice = useMemo(() => {
         if (!matchingVariant) return product.price
         return Number(matchingVariant.price.amount)
-    }, [product.price, matchingVariant, selectedOptions, matchingVariant?.price.amount])
-
-    console.log(matchingVariant)
-    console.log(currentPrice)
-
-    // Set default color and texture when product loads
-    useEffect(() => {
-        const defaultColor = product.colors[0]?.value
-        const defaultTexture = product.textures[0]?.value
-
-        let updated = false
-        let color = selectedColor
-        if (!selectedColor && defaultColor) {
-            color = defaultColor
-            setSelectedColor(color)
-            updated = true
-        }
-
-        let texture = selectedTexture
-        if (!selectedTexture && defaultTexture) {
-            texture = defaultTexture
-            setSelectedTexture(texture)
-            updated = true
-        }
-
-        if (updated) {
-            onOptionChange({
-                color,
-                length: selectedLength,
-                texture,
-                price: currentPrice,
-                quantityAvailable,
-            })
-        }
-    }, [product, selectedColor, selectedTexture, selectedLength, matchingVariant, currentPrice])
+    }, [product.price, matchingVariant])
 
     const quantityAvailable = useMemo(() => {
-        if (!matchingVariant) return 0
+        if (!matchingVariant) return product.stockQuantity
         return matchingVariant.quantityAvailable
-    }, [matchingVariant])
+    }, [matchingVariant, product.stockQuantity])
 
-    const handleColorChange = (colorValue: string) => {
-        setSelectedColor(colorValue)
+    // Set default color when product loads
+    useEffect(() => {
+        if (!selectedColor && product.colors.length > 0) {
+            setSelectedColor(product.colors[0].value)
+        }
+    }, [product, selectedColor])
+
+    // Set default texture when product loads
+    useEffect(() => {
+        if (selectedTexture) return
+
+        let defaultTexture: string | null = null
+
+        if (product.textures.length > 0) {
+            const matchedTexture = product.textures.find((texture) => texture.value === product.texture)
+            defaultTexture = matchedTexture?.value ?? product.textures[0]?.value ?? null
+        } else if (product.texture) {
+            defaultTexture = product.texture
+        }
+
+        if (defaultTexture) {
+            setSelectedTexture(defaultTexture)
+        }
+    }, [product, selectedTexture])
+
+    useEffect(() => {
         onOptionChange({
-            color: colorValue,
+            color: selectedColor,
             length: selectedLength,
             texture: selectedTexture,
             price: currentPrice,
-            quantityAvailable
+            quantityAvailable,
         })
+    }, [selectedColor, selectedLength, selectedTexture, currentPrice, quantityAvailable, onOptionChange])
+
+    const handleColorChange = (colorValue: string) => {
+        setSelectedColor(colorValue)
     }
 
     const handleLengthChange = (lengthValue: string) => {
         setSelectedLength(lengthValue)
+    }
 
-        const variant = findMatchingVariant(product.variants, [
-            { name: 'Length', value: lengthValue },
-            { name: 'Color', value: 'Natural color' },
-        ])
-
-        const price = variant ? Number(variant.price.amount) : product.price
-        const quantity = variant ? variant.quantityAvailable : 0
-
-        onOptionChange({
-            color: selectedColor,
-            length: lengthValue,
-            texture: selectedTexture,
-            price,
-            quantityAvailable: quantity,
-        })
+    const handleTextureChange = (textureValue: string) => {
+        setSelectedTexture(textureValue)
     }
 
     return (
@@ -172,6 +156,34 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                 </div>
             </div>
 
+            {/* Texture Selection */}
+            {product.textures.length > 0 && (
+                <div>
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium">Texture</span>
+                        {selectedTexture && (
+                            <span className="text-sm text-muted-foreground">
+                                {product.textures.find((texture) => texture.value === selectedTexture)?.name ?? selectedTexture}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        {product.textures.map((texture) => (
+                            <button
+                                key={texture.id}
+                                className={`px-4 py-2 rounded-md border transition-all ${
+                                    !texture.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:bg-muted/50"
+                                } ${selectedTexture === texture.value ? "border-primary bg-primary/5" : "border-muted"}`}
+                                onClick={() => texture.inStock && handleTextureChange(texture.value)}
+                                disabled={!texture.inStock}
+                            >
+                                {texture.name ?? texture.value}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
         </div>
     )
-} 
+}
