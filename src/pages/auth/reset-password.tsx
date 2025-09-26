@@ -65,8 +65,8 @@ export default function ResetPasswordPage() {
 
     const onSubmit = async (data: ResetPasswordFormValues) => {
         setIsSubmitting(true)
-        
-        console.log(data);
+
+        console.log(data)
 
         try {
             // Simulate API call

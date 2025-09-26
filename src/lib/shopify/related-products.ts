@@ -76,9 +76,6 @@ export function useRelatedProducts(product: Product) {
                     variables,
                 });
 
-                console.log("RESPONSE")
-                console.log(response);
-
                 const nodes = response.data.data.products.edges.map(edge => edge.node);
 
                 const filtered = nodes
