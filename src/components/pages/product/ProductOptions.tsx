@@ -179,7 +179,7 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
                         value={selectedTexture ?? undefined}
                         onValueChange={handleTextureChange}
                     >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="">
                             <SelectValue placeholder="Select a texture" />
                         </SelectTrigger>
                         <SelectContent>
