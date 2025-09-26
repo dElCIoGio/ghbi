@@ -2,6 +2,13 @@ import { Check } from "lucide-react"
 import { useProductContext } from "@/context/product-context"
 import { useState, useMemo, useEffect } from "react"
 import { useMatchingVariant } from "@/lib/helpers/findMatchingVariant"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 interface ProductOptionsProps {
     onOptionChange: (options: {
@@ -55,8 +62,16 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
         let defaultTexture: string | null = null
 
         if (product.textures.length > 0) {
-            const matchedTexture = product.textures.find((texture) => texture.value === product.texture)
-            defaultTexture = matchedTexture?.value ?? product.textures[0]?.value ?? null
+            const matchedInStockTexture = product.textures.find(
+                (texture) => texture.value === product.texture && texture.inStock,
+            )
+
+            if (matchedInStockTexture) {
+                defaultTexture = matchedInStockTexture.value
+            } else {
+                const firstAvailableTexture = product.textures.find((texture) => texture.inStock)
+                defaultTexture = firstAvailableTexture?.value ?? product.textures[0]?.value ?? null
+            }
         } else if (product.texture) {
             defaultTexture = product.texture
         }
@@ -158,29 +173,27 @@ export function ProductOptions({ onOptionChange }: ProductOptionsProps) {
 
             {/* Texture Selection */}
             {product.textures.length > 0 && (
-                <div>
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium">Texture</span>
-                        {selectedTexture && (
-                            <span className="text-sm text-muted-foreground">
-                                {product.textures.find((texture) => texture.value === selectedTexture)?.name ?? selectedTexture}
-                            </span>
-                        )}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                        {product.textures.map((texture) => (
-                            <button
-                                key={texture.id}
-                                className={`px-4 py-2 rounded-md border transition-all ${
-                                    !texture.inStock ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:bg-muted/50"
-                                } ${selectedTexture === texture.value ? "border-primary bg-primary/5" : "border-muted"}`}
-                                onClick={() => texture.inStock && handleTextureChange(texture.value)}
-                                disabled={!texture.inStock}
-                            >
-                                {texture.name ?? texture.value}
-                            </button>
-                        ))}
-                    </div>
+                <div className="space-y-2">
+                    <span className="font-medium">Texture</span>
+                    <Select
+                        value={selectedTexture ?? undefined}
+                        onValueChange={handleTextureChange}
+                    >
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a texture" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {product.textures.map((texture) => (
+                                <SelectItem
+                                    key={texture.id}
+                                    value={texture.value}
+                                    disabled={!texture.inStock}
+                                >
+                                    {texture.name ?? texture.value}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 </div>
             )}
 
