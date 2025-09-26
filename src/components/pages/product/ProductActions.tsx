@@ -6,11 +6,13 @@ import { useProductContext } from "@/context/product-context"
 import { useCart } from "@/hooks/use-cart"
 import { toast } from "sonner"
 import type {CartItem} from "@/types/cart"
+import { findMatchingVariant } from "@/lib/helpers/findMatchingVariant"
 
 interface ProductActionsProps {
     selectedOptions: {
         color: string | null
         length: string | null
+        texture: string | null
         price: number
         quantityAvailable: number
     }
@@ -40,13 +42,17 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
             return
         }
 
+        if (product.textures.length > 0 && !selectedOptions.texture) {
+            toast.error("Please select all options before adding to cart")
+            return
+        }
+
         // Find the matching variant
-        const matchingVariant = product.variants.find(variant => {
-            if (!variant.selectedOptions) return false
-            return variant.selectedOptions.some(option =>
-                option.name === 'Length' && option.value === selectedOptions.length
-            )
-        })
+        const matchingVariant = findMatchingVariant(product.variants, [
+            ...(selectedOptions.length ? [{ name: "Length", value: selectedOptions.length }] : []),
+            ...(selectedOptions.color ? [{ name: "Color", value: selectedOptions.color }] : []),
+            ...(selectedOptions.texture ? [{ name: "Texture", value: selectedOptions.texture }] : []),
+        ])
 
         if (!matchingVariant) {
             toast.error("Selected combination is not available")
@@ -126,6 +132,7 @@ export function ProductActions({ selectedOptions }: ProductActionsProps) {
                     onClick={handleAddToCart}
                     disabled={
                         (product.lengths.length > 0 && !selectedOptions.length) ||
+                        (product.textures.length > 0 && !selectedOptions.texture) ||
                         selectedOptions.quantityAvailable === 100
                     }
                 >
